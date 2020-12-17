@@ -1,9 +1,9 @@
-package data;
+package com.revature.data;
 
 import com.revature.beans.Person;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import utils.HibernateUtil;
+import com.revature.utils.HibernateUtil;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
