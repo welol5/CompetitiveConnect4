@@ -13,6 +13,18 @@
         <maven.compiler.target>14</maven.compiler.target>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>5.1.5.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <!-- JUnit dependency -->
         <dependency>
@@ -46,6 +58,16 @@
             <groupId>org.hibernate</groupId>
             <version>5.4.25.Final</version>
         </dependency>
+
+        <!-- spring dependencies -->
+        <!--<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>-->
     </dependencies>
 
 </project>
