@@ -63,6 +63,22 @@ public class GameState {
                 '}';
     }
 
+    public String getBoardASCIIPicture(){
+        String boardString = "";
+        int[][] board = generateGameBoard(this.getMoves());
+
+        for(int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) {
+                boardString += "[";
+                boardString += board[row][col];
+                boardString += "]";
+            }
+            boardString += "\n";
+        }
+
+        return boardString;
+    }
+
     /**
      *
      * @param gs The games state that a winner will be searched for
@@ -80,9 +96,9 @@ public class GameState {
                 if(player == 0){
                     continue;
                 } else {
-                    if(player == board[row][col+2]){
-                        if(player == board[row][col+3]){
-                            if(player == board[row][col+4]){
+                    if(player == board[row][col+1]){
+                        if(player == board[row][col+2]){
+                            if(player == board[row][col+3]){
                                 if(player == 1){
                                     return gs.getPlayer1();
                                 } else {
@@ -205,6 +221,8 @@ public class GameState {
             } else {
                 board[row][col] = 2;
             }
+
+            isPlayer1 = !isPlayer1;
         }
 
         return board;
