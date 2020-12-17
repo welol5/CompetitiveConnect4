@@ -1,4 +1,4 @@
-package data;
+package com.revature.data;
 
 import java.util.List;
 

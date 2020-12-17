@@ -1,4 +1,4 @@
-package data;
+package com.revature.data;
 
 import com.revature.beans.Person;
 
