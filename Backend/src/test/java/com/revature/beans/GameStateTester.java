@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class GameStateTester {
 
@@ -12,10 +13,13 @@ public class GameStateTester {
 
     private static GameState gameState;
 
-    private static String[] moveSets = {
-            "12121212",
-            "11223344",
-            //"122334344"
+    private static String[] p1WinMoveSets = {
+            "01010101",
+            "11223344"
+    };
+
+    private static String[] badInput = {
+            "111111111111111111"
     };
 
     @BeforeAll
@@ -35,10 +39,17 @@ public class GameStateTester {
 
     @Test
     public void testP1Wins(){
-        for(String s : moveSets){
+        for(String s : p1WinMoveSets){
             gameState.setMoves(s);
-            System.out.println(gameState.getBoardASCIIPicture());
             assertEquals(player1, GameState.getWinner(gameState));
+        }
+    }
+
+    @Test
+    public void testBadInput(){
+        for(String s : badInput){
+            gameState.setMoves(s);
+            assertNull(GameState.getWinner(gameState));
         }
     }
 }
