@@ -1,12 +1,21 @@
 package com.revature.beans;
-
+import javax.persistence.*;
 import java.util.Objects;
+import com.revature.beans.Person;
 
+@Entity
+@Table(name="game_state")
 public class GameState {
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id; //Who knows how many games people could play
+    @Column(name="moveslist")
     private String moves;
-    private User player1;
-    private User player2;
+    //@ManyToOne(fetch=FetchType.EAGER)
+    @Transient
+    private Person player1;
+    @Transient
+    private Person player2;
 
     public long getId() {
         return id;
@@ -24,19 +33,19 @@ public class GameState {
         this.moves = moves;
     }
 
-    public User getPlayer1() {
+    public Person getPlayer1() {
         return player1;
     }
 
-    public void setPlayer1(User player1) {
+    public void setPlayer1(Person player1) {
         this.player1 = player1;
     }
 
-    public User getPlayer2() {
+    public Person getPlayer2() {
         return player2;
     }
 
-    public void setPlayer2(User player2) {
+    public void setPlayer2(Person player2) {
         this.player2 = player2;
     }
 
@@ -84,7 +93,7 @@ public class GameState {
      * @param gs The games state that a winner will be searched for
      * @return The winning player or null if there is no winner
      */
-    public static User getWinner(GameState gs){
+    public static Person getWinner(GameState gs){
 
         //build the game board as an array
         int[][] board = generateGameBoard(gs.getMoves());

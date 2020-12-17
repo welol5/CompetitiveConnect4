@@ -1,12 +1,13 @@
 package com.revature.beans;
+
 import javax.persistence.*;
-import javax.persistence.Table;
 import java.util.Objects;
 
-
-public class User {
+@Entity
+@Table()
+public class Person {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String username;
     @Column(name="pass")
@@ -16,12 +17,26 @@ public class User {
     @Column(name = "skill_ranking")
     private Integer rank;
 
-    public User() {
+    public Person() {
         id = 0;
         username = "";
         password = "";
         profilePicFilePath = "";
         rank = 0;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getUsername() {
@@ -32,14 +47,6 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getProfilePicFilePath() {
         return profilePicFilePath;
     }
@@ -47,27 +54,27 @@ public class User {
     public void setProfilePicFilePath(String profilePicFilePath) {
         this.profilePicFilePath = profilePicFilePath;
     }
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", profilePicFilePath='" + profilePicFilePath + '\'' +
+                ", rank=" + rank +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(profilePicFilePath, user.profilePicFilePath);
+        Person person = (Person) o;
+        return id == person.id && Objects.equals(username, person.username) && Objects.equals(password, person.password) && Objects.equals(profilePicFilePath, person.profilePicFilePath) && Objects.equals(rank, person.rank);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, profilePicFilePath);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", profilePicFilePath='" + profilePicFilePath + '\'' +
-                '}';
+        return Objects.hash(id, username, password, profilePicFilePath, rank);
     }
 }
