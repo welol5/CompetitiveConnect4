@@ -184,6 +184,7 @@ public class GameState {
                 }
             }
         }
+        return null;//no winner found;
     }
 
     private static int[][] generateGameBoard(String moveList){
