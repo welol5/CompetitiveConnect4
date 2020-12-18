@@ -12,8 +12,14 @@ public class PersonDAOImplTest {
     void getByUserIdTest() {
         PersonDAOFactory personDAOFactory = new PersonDAOFactory();
         personDao = personDAOFactory.getPersonDAO();
-        Person person = personDao.getById(1);
-        assertEquals(1, person.getId());
+        Person person = new Person();
+        person = personDao.getById(2);
+        Person p = new Person();
+        p.setId(2);
+        p.setPassword("test");
+        p.setUsername("test");
+        p.setRank(1000);
+        assertEquals(p, person);
 
     }
 }

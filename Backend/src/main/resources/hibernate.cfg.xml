@@ -16,6 +16,8 @@
 
         <!-- tell hibernate where to find our mappings  -->
         <mapping class="com.revature.beans.Person"></mapping>
+        <mapping class="com.revature.beans.GameState"></mapping>
+        <mapping class="com.revature.beans.GameHistory"></mapping>
 
     </session-factory>
 </hibernate-configuration>
