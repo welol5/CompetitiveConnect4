@@ -1,3 +1,5 @@
 /Files/*
 .idea/
 Backend/.idea
+Backend/.gradel
+Backend/CompetitiveConnect4.impl

@@ -4,9 +4,9 @@
     <session-factory>
         <!-- set up connection info -->
         <property name="hibernate.connection.driver.class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://connectfour.cq36fuhygul5.us-east-2.rds.amazonaws.com:5432?currentSchema=trms</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://connectfour.cq36fuhygul5.us-east-2.rds.amazonaws.com:5432/postgres?currentSchema=project2</property>
         <property name="hibernate.connection.username">postgres</property>
-        <property name="hibernate.connection.password">password</property>
+        <property name="hibernate.connection.password">postgres</property>
 
         <!-- hibernate setup -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
@@ -15,7 +15,7 @@
         <property name="use_sql_comments">true</property>
 
         <!-- tell hibernate where to find our mappings  -->
-        <mapping class="com.revature.beans.User"></mapping>
+        <mapping class="com.revature.beans.Person"></mapping>
 
     </session-factory>
 </hibernate-configuration>
