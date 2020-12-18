@@ -120,5 +120,8 @@
       }
     }
   },
-  "defaultProject": "competitive-connect-four"
+  "defaultProject": "competitive-connect-four",
+  "cli": {
+    "analytics": "9b2c8509-aa9f-46ea-9725-983808171ed3"
+  }
 }
