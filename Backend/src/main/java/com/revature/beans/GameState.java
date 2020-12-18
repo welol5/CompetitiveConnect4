@@ -2,6 +2,7 @@ package com.revature.beans;
 import javax.persistence.*;
 import java.util.Objects;
 import com.revature.beans.Person;
+import com.revature.exceptions.GameRuleException;
 
 @Entity
 @Table(name="game_state")
@@ -72,7 +73,7 @@ public class GameState {
                 '}';
     }
 
-    private static String getBoardASCIIPicture(int[][] board){
+    private static String getBoardASCIIPicture(int[][] board) throws GameRuleException{
         String boardString = "";
 
         for(int row = 0; row < board.length; row++) {
@@ -87,7 +88,7 @@ public class GameState {
         return boardString;
     }
 
-    public String getBoardASCIIPicture(){
+    public String getBoardASCIIPicture() throws GameRuleException{
         int[][] board = generateGameBoard(this.getMoves());
         return getBoardASCIIPicture(board);
     }
@@ -97,7 +98,7 @@ public class GameState {
      * @param gs The games state that a winner will be searched for
      * @return The winning player or null if there is no winner
      */
-    public static Person getWinner(GameState gs){
+    public static Person getWinner(GameState gs) throws GameRuleException{
 
         //build the game board as an array
         int[][] board = generateGameBoard(gs.getMoves());
@@ -216,7 +217,7 @@ public class GameState {
         return null;//no winner found;
     }
 
-    private static int[][] generateGameBoard(String moveList){
+    private static int[][] generateGameBoard(String moveList) throws GameRuleException {
         //int[row][col]
         //board[0][0] is the bottom left
         int[][] board = new int[6][7];
@@ -224,16 +225,15 @@ public class GameState {
         boolean isPlayer1 = true;
         for(char c : moveList.toCharArray()){
             int col = Integer.valueOf("" + c);
+            if(col >= 7){
+                throw new GameRuleException();
+            }
             int row = 0;
-            for(int i = 0; board[i][col] != 0 && i < board.length-1; i++) {
+            for(int i = 0; board[i][col] != 0 && i < board.length; i++) {
                 row = i+1;
                 if(row == board.length){
-                    row = -1;
+                    throw new GameRuleException();
                 }
-            }
-
-            if(row == -1){
-                continue;
             }
 
             if(isPlayer1){

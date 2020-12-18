@@ -1,10 +1,10 @@
 package com.revature.beans;
 
+import com.revature.exceptions.GameRuleException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GameStateTester {
 
@@ -15,11 +15,17 @@ public class GameStateTester {
 
     private static String[] p1WinMoveSets = {
             "01010101",
-            "11223344"
+            "11223344",
+            "00112233"
+    };
+
+    private static String[] p2WinMoveSets = {
+            "01020314"
     };
 
     private static String[] badInput = {
-            "111111111111111111"
+            "0000000000000000",
+            "8"
     };
 
     @BeforeAll
@@ -41,15 +47,36 @@ public class GameStateTester {
     public void testP1Wins(){
         for(String s : p1WinMoveSets){
             gameState.setMoves(s);
-            assertEquals(player1, GameState.getWinner(gameState));
+            Person p;
+            try {
+                p = GameState.getWinner(gameState);
+                assertEquals(player1, p);
+            } catch (GameRuleException e) {
+
+            }
         }
     }
 
     @Test
+    public void testP2Wins(){
+        for(String s : p2WinMoveSets){
+            gameState.setMoves(s);
+            Person p;
+            try {
+                p = GameState.getWinner(gameState);
+                assertEquals(player2, p);
+            } catch (GameRuleException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    @Test
     public void testBadInput(){
         for(String s : badInput){
             gameState.setMoves(s);
-            assertNull(GameState.getWinner(gameState));
+            assertThrows(GameRuleException.class, () -> {
+                GameState.getWinner(gameState);
+            });
         }
     }
 }
