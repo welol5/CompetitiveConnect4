@@ -1,4 +1,4 @@
-create schema project2;
+--create schema project2;
 
 drop table project2.game_history;
 drop table project2.game_state;
@@ -6,7 +6,7 @@ drop table project2.person;
 
 create table project2.person(
 	id serial primary key,
-	username varchar(64) not null,
+	username varchar(64) unique not null,
 	pass varchar(64) not null,
 	skill_ranking integer not null,
 	profile_pic_path varchar(128)
@@ -21,7 +21,7 @@ create table project2.game_state(
 
 create table project2.game_history(
 	id serial primary key,
-	date_played date not null,
+	date_played timestamp not null,
 	winning_player_id integer references person,
-	game_state_id integer references game_state
+	game_state_id integer references project2.game_state
 );
