@@ -3,8 +3,9 @@ package com.revature.beans;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
-
-public class OldGame {
+@Entity
+@Table(name="game_history")
+public class GameHistory {
     @Id
     private long id;
     @Column(name="date_played")
@@ -52,7 +53,7 @@ public class OldGame {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OldGame oldGame = (OldGame) o;
+        GameHistory oldGame = (GameHistory) o;
         return id == oldGame.id && Objects.equals(timestamp, oldGame.timestamp) && Objects.equals(winner, oldGame.winner) && Objects.equals(game, oldGame.game);
     }
 
