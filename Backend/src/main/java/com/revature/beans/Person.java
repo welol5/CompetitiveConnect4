@@ -17,6 +17,8 @@ public class Person {
     @Column(name = "skill_ranking")
     private Integer rank;
 
+
+
     public Person() {
         id = 0;
         username = "";
@@ -53,6 +55,13 @@ public class Person {
 
     public void setProfilePicFilePath(String profilePicFilePath) {
         this.profilePicFilePath = profilePicFilePath;
+    }
+    public Integer getRank() {
+        return rank;
+    }
+
+    public void setRank(Integer rank) {
+        this.rank = rank;
     }
     @Override
     public String toString() {
