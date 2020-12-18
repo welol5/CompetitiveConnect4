@@ -25,7 +25,7 @@ public class GameStateTester {
 
     private static String[] badInput = {
             "0000000000000000",
-            "8"
+            "7"
     };
 
     @BeforeAll

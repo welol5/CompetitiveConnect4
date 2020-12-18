@@ -7,6 +7,7 @@ import java.util.Objects;
 @Table(name="game_history")
 public class GameHistory {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     @Column(name="date_played")
     private LocalDateTime timestamp;
