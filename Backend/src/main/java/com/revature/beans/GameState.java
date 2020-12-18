@@ -72,9 +72,8 @@ public class GameState {
                 '}';
     }
 
-    public String getBoardASCIIPicture(){
+    private static String getBoardASCIIPicture(int[][] board){
         String boardString = "";
-        int[][] board = generateGameBoard(this.getMoves());
 
         for(int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[row].length; col++) {
@@ -86,6 +85,11 @@ public class GameState {
         }
 
         return boardString;
+    }
+
+    public String getBoardASCIIPicture(){
+        int[][] board = generateGameBoard(this.getMoves());
+        return getBoardASCIIPicture(board);
     }
 
     /**
@@ -221,8 +225,15 @@ public class GameState {
         for(char c : moveList.toCharArray()){
             int col = Integer.valueOf("" + c);
             int row = 0;
-            for(int i = 0; board[i][col] != 0 ; i++) {
-                row = i;
+            for(int i = 0; board[i][col] != 0 && i < board.length-1; i++) {
+                row = i+1;
+                if(row == board.length){
+                    row = -1;
+                }
+            }
+
+            if(row == -1){
+                continue;
             }
 
             if(isPlayer1){
