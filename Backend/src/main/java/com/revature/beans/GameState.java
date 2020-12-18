@@ -12,10 +12,11 @@ public class GameState {
     private long id; //Who knows how many games people could play
     @Column(name="moveslist")
     private String moves;
-    //@ManyToOne(fetch=FetchType.EAGER)
-    @Transient
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="player_one_id")
     private Person player1;
-    @Transient
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="player_two_id")
     private Person player2;
 
     public long getId() {
