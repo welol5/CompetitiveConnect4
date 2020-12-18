@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GameStateTester {
 
-    private static User player1;
-    private static User player2;
+    private static Person player1;
+    private static Person player2;
 
     private static GameState gameState;
 
@@ -20,11 +20,11 @@ public class GameStateTester {
 
     @BeforeAll
     public static void beforeAll(){
-        player1 = new User();
+        player1 = new Person();
         player1.setUsername("p1");
         player1.setPassword("password");
 
-        player2 = new User();
+        player2 = new Person();
         player2.setUsername("p2");
         player2.setPassword("password");
 

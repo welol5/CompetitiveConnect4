@@ -1,18 +1,21 @@
 package com.revature.data;
 
 import com.revature.beans.Person;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
-import com.revature.utils.HibernateUtil;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import org.hibernate.Transaction;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import com.revature.utils.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 public class PersonDAOImpl implements PersonDAO {
     private HibernateUtil hu = HibernateUtil.getHibernateUtil();
