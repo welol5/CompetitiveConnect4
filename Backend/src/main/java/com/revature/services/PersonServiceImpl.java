@@ -23,8 +23,13 @@ public class PersonServiceImpl implements PersonService {
 		return personDao.getById(id);
 	}
 
-	
-
+	@Override
+	public Person updateUsername(Person p, String newUsername) {
+		p.setUsername(newUsername);
+		personDao.update(p);
+		return personDao.getByUsername(newUsername);
+	}
+// add a comment
 	@Override
 	public void updatePerson(Person p) {
 		personDao.update(p);
