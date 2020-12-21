@@ -40,7 +40,8 @@ public class PersonDAOImpl implements PersonDAO {
     @Override
     public List<Person> getAll() {
         Session s = hu.getSession();
-        String query = "from Person";
+        String query = "";
+        query += "from Person";
         Query<Person> p = s.createQuery(query, Person.class);
         List<Person> personList = new ArrayList();
         personList = p.getResultList();
