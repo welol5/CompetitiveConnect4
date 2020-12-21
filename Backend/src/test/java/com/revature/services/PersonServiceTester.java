@@ -36,8 +36,10 @@ public class PersonServiceTester {
 //        when(ps.updateUsername(testPerson, "Player5")).then(invocation -> {
 //
 //        });
-        when(ps.updateUsername(testPerson, "Player5")).thenReturn(testPerson);
-        assertEquals(testPerson2,ps.updateUsername(testPerson, "Player5"));
+//        when(ps.updateUsername(testPerson, "Player5")).thenReturn(testPerson);
+
+        assertEquals(testPerson2,ps.getPersonByUsername("Player5"));
+
         
 
     }

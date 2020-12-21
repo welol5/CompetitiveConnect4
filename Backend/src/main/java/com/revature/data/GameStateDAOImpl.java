@@ -30,13 +30,7 @@ public class GameStateDAOImpl implements GameStateDAO{
         return gameState;
     }
 
-    @Override
-    public GameState getById(Integer id) {
-        Session s = hu.getSession();
-        GameState g = s.get(GameState.class, id);
-        s.close();
-        return g;
-    }
+ 
     public GameState getByLongId(Long id) {
         Session s = hu.getSession();
         GameState g = s.get(GameState.class, id);
@@ -46,7 +40,8 @@ public class GameStateDAOImpl implements GameStateDAO{
     @Override
     public List<GameState> getAll() {
         Session s = hu.getSession();
-        String query = "from GameState";
+        String query = "";
+        query += "from GameState";
         Query<GameState> g = s.createQuery(query, GameState.class);
         List<GameState> gameStateList = new ArrayList<>();
         gameStateList = g.getResultList();
