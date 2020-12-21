@@ -1,1 +1,15 @@
-<p>login works!</p>
+<div>
+    <ng-container *ngIf="!loggedPerson; else loggedIn">
+        <label for="user">Username: </label>
+        <input id="user" name="user" type="text" [(ngModel)]="user" />
+        <label for="pass"> Password: </label>
+        <input id="pass" name="pass" type="password" [(ngModel)]="pass" />
+        <button type="button" id="loginBtn" (click)="logIn()">Log In</button>
+    </ng-container>
+    <ng-template #loggedIn>
+        <span>
+            <a href="manage">{{ loggedPerson.username }}&nbsp;</a>
+            <button type="button" id="loginBtn" (click)="logOut()">Log Out</button>
+        </span>
+    </ng-template>
+</div>>
