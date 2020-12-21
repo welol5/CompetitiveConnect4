@@ -1,17 +1,19 @@
-<div id="game-board">
-    <table id="board">
-        <tr *ngFor="let row of board | keyvalue">
-            <td *ngFor="let col of row.value | keyvalue" (click)="makeMove(row.key,col.key)">
-                <div *ngIf="col.value == 0" class="place player0">
-                    <!-- {{col.value}} --> circle
-                </div>
-                <div *ngIf="col.value == 1" class="place player1">
-                    <!-- {{col.value}} --> circle
-                </div>
-                <div *ngIf="col.value == 2" class="place player2">
-                    <!-- {{col.value}} --> circle
-                </div>
-            </td>
-        </tr>
-    </table>
+<div id="board-container">
+    <div id="game-board">
+        <table id="board">
+            <tr *ngFor="let row of board | keyvalue">
+                <td *ngFor="let col of row.value | keyvalue" (click)="makeMove(row.key,col.key)">
+                    <div *ngIf="col.value == 0" class="place player0">
+                        <!-- {{col.value}} --> 
+                    </div>
+                    <div *ngIf="col.value == 1" class="place player1">
+                        <!-- {{col.value}} --> 
+                    </div>
+                    <div *ngIf="col.value == 2" class="place player2">
+                        <!-- {{col.value}} --> 
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
