@@ -14,7 +14,7 @@ public class GameHistoryDAOImplTest {
         GameHistoryDAOFactory gameHistoryDAOFactory = new GameHistoryDAOFactory();
         gameHistoryDAO = gameHistoryDAOFactory.getGameHistoryDAO();
         GameHistory gameHistory = new GameHistory();
-        gameHistory = gameHistoryDAO.getById(1);
+        gameHistory = gameHistoryDAO.getByLongId((long) 1);
 
         GameHistory g = new GameHistory();
         GameState gameState = new GameState();
