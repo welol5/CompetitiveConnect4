@@ -103,5 +103,6 @@ public class GameHistoryDAOImplTest {
         gameHistoryArrayList.add(g);
         assertEquals(gameHistoryArrayList, gameHistoryDAO.getDailyLeaderboard());
 
+
     }
 }

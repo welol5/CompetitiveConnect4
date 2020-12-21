@@ -36,13 +36,6 @@ public class GameHistoryDAOImpl implements GameHistoryDAO{
         s.close();
         return g;
     }
-    @Override
-    public GameHistory getByLongId(Long id) {
-        Session s = hu.getSession();
-        GameHistory g = s.get(GameHistory.class, id);
-        s.close();
-        return g;
-    }
 
     @Override
     public List<GameHistory> getAll() {
@@ -102,7 +95,6 @@ public class GameHistoryDAOImpl implements GameHistoryDAO{
         List<GameHistory> gameHistoryList = new ArrayList<>();
         gameHistoryList = g.getResultList();
         s.close();
-
         return gameHistoryList;
     }
 
