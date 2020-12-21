@@ -25,8 +25,8 @@ public class GameHistoryServiceImpl implements GameHistoryService{
 
 
     @Override
-    public GameHistory getById(Integer id) {
-        return gameHistoryDAO.getById(id);
+    public GameHistory getById(Long id) {
+        return gameHistoryDAO.getByLongId(id);
     }
 
     @Override
