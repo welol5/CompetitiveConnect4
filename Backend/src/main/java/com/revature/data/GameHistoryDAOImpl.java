@@ -2,6 +2,7 @@ package com.revature.data;
 
 import com.revature.beans.GameHistory;
 import com.revature.beans.GameState;
+import com.revature.beans.Person;
 import com.revature.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -28,9 +29,15 @@ public class GameHistoryDAOImpl implements GameHistoryDAO{
         }
         return gameHistory;
     }
-
     @Override
-    public GameHistory getById(Integer id) {
+    public GameHistory getByLongId(Long id) {
+        Session s = hu.getSession();
+        GameHistory g = s.get(GameHistory.class, id);
+        s.close();
+        return g;
+    }
+    @Override
+    public GameHistory getByLongId(Long id) {
         Session s = hu.getSession();
         GameHistory g = s.get(GameHistory.class, id);
         s.close();
@@ -40,7 +47,8 @@ public class GameHistoryDAOImpl implements GameHistoryDAO{
     @Override
     public List<GameHistory> getAll() {
         Session s = hu.getSession();
-        String query = "from GameHistory";
+        String query = "";
+        query +="from GameHistory";
         Query<GameHistory> g = s.createQuery(query, GameHistory.class);
         List<GameHistory> gameHistoryList = new ArrayList<>();
         gameHistoryList = g.getResultList();
@@ -69,4 +77,34 @@ public class GameHistoryDAOImpl implements GameHistoryDAO{
     public void delete(GameHistory gameHistory) {
 
     }
+
+    @Override
+    public List<GameHistory> getDailyLeaderboard() {
+        Session s = hu.getSession();
+        String query = "";
+        query += "from GameHistory WHERE DATE('timestamp') >= CURDATE()";
+        Query<GameHistory> g = s.createQuery(query, GameHistory.class);
+        List<GameHistory> gameHistoryList = new ArrayList<>();
+        gameHistoryList = g.getResultList();
+        s.close();
+
+        return gameHistoryList;
+    }
+
+    @Override
+    public List<GameHistory> getByPersonId(Integer id) {
+        Session s = hu.getSession();
+        String query = "";
+        query += " from GameHistory WHERE game.player1.id = :id or game.player2.id = :id2";
+        Query<GameHistory> g = s.createQuery(query, GameHistory.class);
+        g.setParameter("id", id);
+        g.setParameter("id2", id);
+        List<GameHistory> gameHistoryList = new ArrayList<>();
+        gameHistoryList = g.getResultList();
+        s.close();
+
+        return gameHistoryList;
+    }
+
+
 }

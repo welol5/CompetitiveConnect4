@@ -18,6 +18,14 @@ public class GameHistory {
     @JoinColumn(name="game_state_id")
     private GameState game;
 
+    public GameHistory() {
+        id = 0;
+        timestamp = LocalDateTime.now();
+        winner = null;
+        game = null;
+
+    }
+
     public long getId() {
         return id;
     }
