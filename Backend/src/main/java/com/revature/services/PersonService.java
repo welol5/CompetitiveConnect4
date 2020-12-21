@@ -8,7 +8,7 @@ public interface PersonService {
 	public Integer addPerson(Person p);
 	// read
 	public Person getPersonById(Integer id);
-	
+	public Person getPersonByUsername(String username);
 	// update
 	public void updatePerson(Person p);
 	// delete
