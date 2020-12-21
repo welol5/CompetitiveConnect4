@@ -31,7 +31,7 @@ public class GameStateDAOImpl implements GameStateDAO{
     }
 
     @Override
-    public GameState getById(Integer id) {
+    public GameState getById(Long id) {
         Session s = hu.getSession();
         GameState g = s.get(GameState.class, id);
         s.close();
