@@ -37,7 +37,9 @@ public class PersonServiceTester {
 //
 //        });
 //        when(ps.updateUsername(testPerson, "Player5")).thenReturn(testPerson);
+
         assertEquals(testPerson2,ps.getPersonByUsername("Player5"));
+
         
 
     }

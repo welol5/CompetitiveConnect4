@@ -40,7 +40,8 @@ public class GameStateDAOImpl implements GameStateDAO{
     @Override
     public List<GameState> getAll() {
         Session s = hu.getSession();
-        String query = "from GameState";
+        String query = "";
+        query += "from GameState";
         Query<GameState> g = s.createQuery(query, GameState.class);
         List<GameState> gameStateList = new ArrayList<>();
         gameStateList = g.getResultList();
