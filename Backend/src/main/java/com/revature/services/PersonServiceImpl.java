@@ -19,7 +19,7 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public Person getPersonById(Long id) {
+	public Person getPersonById(Integer id) {
 		return personDao.getById(id);
 	}
 

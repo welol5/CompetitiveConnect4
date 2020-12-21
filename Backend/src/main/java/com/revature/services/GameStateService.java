@@ -7,8 +7,8 @@ public interface GameStateService {
 
 	public Long createNewGame(GameState gs); 
 
-	public GameState getGateStateById(Long id);
+	public GameState getGameStateById(Long id);
 	
-	public void updateGameState(GameState gs);
+	public void makeMove(GameState gs);
 		 
 }

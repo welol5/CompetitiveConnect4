@@ -21,13 +21,13 @@ public class GameStateServiceImpl implements GameStateService {
 	}
 
 	@Override
-	public GameState getGateStateById(Long id) {
-		return gameStateDao.getById(id);
+	public GameState getGameStateById(Long id) {
+		return gameStateDao.getByLongId(id);
 	}
 
 
 	@Override
-	public void updateGameState(GameState gs) {
+	public void makeMove(GameState gs) {
 		gameStateDao.update(gs);
 	}
 

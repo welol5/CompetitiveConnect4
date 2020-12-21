@@ -7,7 +7,7 @@ public interface PersonService {
 	// create
 	public Integer addPerson(Person p);
 	// read
-	public Person getPersonById(Long id);
+	public Person getPersonById(Integer id);
 	
 	// update
 	public void updatePerson(Person p);
