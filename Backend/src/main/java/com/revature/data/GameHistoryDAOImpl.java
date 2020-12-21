@@ -36,13 +36,6 @@ public class GameHistoryDAOImpl implements GameHistoryDAO{
         s.close();
         return g;
     }
-    @Override
-    public GameHistory getByLongId(Long id) {
-        Session s = hu.getSession();
-        GameHistory g = s.get(GameHistory.class, id);
-        s.close();
-        return g;
-    }
 
     @Override
     public List<GameHistory> getAll() {
@@ -82,7 +75,7 @@ public class GameHistoryDAOImpl implements GameHistoryDAO{
     public List<GameHistory> getDailyLeaderboard() {
         Session s = hu.getSession();
         String query = "";
-        query += "from GameHistory WHERE DATE('timestamp') >= CURDATE()";
+        query += "from GameHistory WHERE DATE(timestamp) >= current_date()";
         Query<GameHistory> g = s.createQuery(query, GameHistory.class);
         List<GameHistory> gameHistoryList = new ArrayList<>();
         gameHistoryList = g.getResultList();
@@ -95,14 +88,13 @@ public class GameHistoryDAOImpl implements GameHistoryDAO{
     public List<GameHistory> getByPersonId(Integer id) {
         Session s = hu.getSession();
         String query = "";
-        query += " from GameHistory WHERE game.player1.id = :id or game.player2.id = :id2";
+        query += " from GameHistory WHERE game.player1.id = :id or game.player2.id = :id2 order by date_played desc";
         Query<GameHistory> g = s.createQuery(query, GameHistory.class);
         g.setParameter("id", id);
         g.setParameter("id2", id);
         List<GameHistory> gameHistoryList = new ArrayList<>();
         gameHistoryList = g.getResultList();
         s.close();
-
         return gameHistoryList;
     }
 
