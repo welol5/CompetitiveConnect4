@@ -72,4 +72,36 @@ public class GameHistoryDAOImplTest {
         assertEquals(gameHistoryArrayList, gameHistoryDAO.getByPersonId(2));
 
     }
+    @Test
+    void getLeaderboardTest() {
+        GameHistoryDAOFactory gameHistoryDAOFactory = new GameHistoryDAOFactory();
+        gameHistoryDAO = gameHistoryDAOFactory.getGameHistoryDAO();
+
+        GameHistory g = new GameHistory();
+        GameState gameState = new GameState();
+        Person p = new Person();
+        p.setId(2);
+        p.setPassword("test");
+        p.setUsername("test");
+        p.setRank(1000);
+        Person p1 = new Person();
+        p1.setId(1);
+        p1.setPassword("test");
+        p1.setUsername("test2");
+        p1.setRank(1000);
+
+        gameState.setId(3L);
+        gameState.setMoves("1234567");
+        gameState.setPlayer1(p);
+        gameState.setPlayer2(p1);
+        g.setGame(gameState);
+        List<GameHistory> gameHistoryArrayList = new ArrayList<>();
+
+        g.setTimestamp(gameHistoryDAO.getByLongId(3L).getTimestamp());
+        g.setWinner(p);
+        g.setId(3L);
+        gameHistoryArrayList.add(g);
+        assertEquals(gameHistoryArrayList, gameHistoryDAO.getDailyLeaderboard());
+
+    }
 }
