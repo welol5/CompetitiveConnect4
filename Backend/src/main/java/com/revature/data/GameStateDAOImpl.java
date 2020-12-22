@@ -6,10 +6,12 @@ import org.hibernate.QueryException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class GameStateDAOImpl implements GameStateDAO{
     private HibernateUtil hu = HibernateUtil.getHibernateUtil();
     @Override

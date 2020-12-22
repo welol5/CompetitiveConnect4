@@ -7,10 +7,12 @@ import com.revature.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class GameHistoryDAOImpl implements GameHistoryDAO{
     private HibernateUtil hu = HibernateUtil.getHibernateUtil();
     @Override

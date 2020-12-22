@@ -3,15 +3,22 @@ package com.revature.services;
 import com.revature.beans.Person;
 import com.revature.data.PersonDAO;
 import com.revature.data.PersonDAOFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PersonServiceImpl implements PersonService {
 
 	private PersonDAO personDao;
-	
-	public PersonServiceImpl() {
+
+	@Autowired
+	public PersonServiceImpl(PersonDAO p){
+	    personDao = p;
+    }
+	/*public PersonServiceImpl() {
 		PersonDAOFactory personDaoFactory = new PersonDAOFactory();
 		personDao = personDaoFactory.getPersonDAO();
-	}
+	}*/
 
 	@Override
 	public Integer addPerson(Person p) {
