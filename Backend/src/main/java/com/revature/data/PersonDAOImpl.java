@@ -16,7 +16,9 @@ import com.revature.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class PersonDAOImpl implements PersonDAO {
     private HibernateUtil hu = HibernateUtil.getHibernateUtil();
     @Override
