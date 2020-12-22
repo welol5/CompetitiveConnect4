@@ -30,6 +30,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
         </dependency>
+
         <!-- JUnit dependency -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
