@@ -6,10 +6,16 @@ import com.revature.data.GameStateDAO;
 import com.revature.data.GameStateDAOFactory;
 import com.revature.data.PersonDAO;
 import com.revature.data.PersonDAOFactory;
+import org.springframework.stereotype.Service;
 
+@Service
 public class GameStateServiceImpl implements GameStateService {
 	private GameStateDAO gameStateDao;
-	
+
+    public GameStateServiceImpl(GameStateDAO gs) {
+        gameStateDao =gs;
+    }
+
 	public GameStateServiceImpl() {
 		GameStateDAOFactory gameStateDaoFactory = new GameStateDAOFactory();
 		gameStateDao = gameStateDaoFactory.getGameStateDAO();

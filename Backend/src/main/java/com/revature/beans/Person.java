@@ -77,9 +77,9 @@ public class Person {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Person)) return false;
         Person person = (Person) o;
-        return id == person.id && Objects.equals(username, person.username) && Objects.equals(password, person.password) && Objects.equals(profilePicFilePath, person.profilePicFilePath) && Objects.equals(rank, person.rank);
+        return id == person.id && username.equals(person.username) && password.equals(person.password) && Objects.equals(profilePicFilePath, person.profilePicFilePath) && rank.equals(person.rank);
     }
 
     @Override
