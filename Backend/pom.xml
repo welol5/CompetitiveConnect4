@@ -90,10 +90,6 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.9.3</version>
         </dependency>
-<<<<<<< HEAD
-
-=======
->>>>>>> a991743542cd81e6ee730ac7cc715b338ed74bda
         <!-- spring dependencies -->
         <!--<dependency>
             <groupId>org.springframework</groupId>
