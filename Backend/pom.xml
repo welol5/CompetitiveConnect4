@@ -73,6 +73,7 @@
             <groupId>org.hibernate</groupId>
             <version>5.4.25.Final</version>
         </dependency>
+        <!-- our jackson libraries: allow us to map JSON -->
 <!--        jackson dependencies-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
