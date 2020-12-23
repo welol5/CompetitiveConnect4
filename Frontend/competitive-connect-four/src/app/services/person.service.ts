@@ -18,7 +18,7 @@ export class PersonService {
     'Content-Type':'application/json'})
 
   constructor(private http: HttpClient,private urlService:UrlService, private cookieService: CookieService) {
-    this.personUrl = this.urlService.getUrl() + 'person';
+    this.personUrl = this.urlService.getUrl() + 'CompetitiveConnect4_war_exploded/users';
    }
 
    loginPerson(username: string, password: string): Observable<Person> {
