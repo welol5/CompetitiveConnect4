@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { UrlService } from './services/url.service';
 import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
+import { SocketioService } from './services/socketio.service';
+import { GameService } from './services/game.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { AppRoutingModule } from './app-routing.module';
   providers: [
     PersonService,
     UrlService,
-    CookieService
+    CookieService,
+    SocketioService,
+    GameService
   ],
   bootstrap: [AppComponent]
 })

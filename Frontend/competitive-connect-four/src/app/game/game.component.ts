@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GameService } from '../services/game.service';
 
 @Component({
   selector: 'app-game',
@@ -10,7 +11,9 @@ export class GameComponent implements OnInit {
   board : number[][];
   player : number = 1;
 
-  constructor() { }
+  constructor(private gameService: GameService) {
+
+  }
 
   ngOnInit(): void {
     this.board = [[0,0,0,0,0,0,0],
@@ -45,5 +48,11 @@ export class GameComponent implements OnInit {
         break;
       }
     }
+
+    // this.gameService.makeMove(row,col).subscribe(
+    //   response => {
+    //     console.log(response);
+    //   }
+    // );
   }
 }
