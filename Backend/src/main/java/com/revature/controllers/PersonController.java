@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200", allowCredentials="true")
-@RequestMapping(path="/users")
+@RequestMapping(path="/persons")
 public class PersonController {
     private PersonService personServ;
 
@@ -61,5 +61,13 @@ public class PersonController {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+    
+    @GetMapping(path="/{id}")
+    public ResponseEntity<Person> retrievePersonProfile(HttpSession session, @PathVariable("id") Integer id,
+    	                             	@RequestBody Person person){
+    	Person loggedPerson = (Person) session.getAttribute("user");
+    	if (loggedPerson != null && loggedPerson.getId() == id) return ResponseEntity.ok(loggedPerson);
+    	return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 }
