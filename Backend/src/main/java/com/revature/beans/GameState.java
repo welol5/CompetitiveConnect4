@@ -3,7 +3,9 @@ import javax.persistence.*;
 import java.util.Objects;
 import com.revature.beans.Person;
 import com.revature.exceptions.GameRuleException;
+import org.springframework.stereotype.Component;
 
+//@Component
 @Entity
 @Table(name="game_state")
 public class GameState {
@@ -89,7 +91,7 @@ public class GameState {
         return boardString;
     }
 
-    public String getBoardASCIIPicture() throws GameRuleException{
+    public String BoardASCIIPicture() throws GameRuleException{
         int[][] board = generateGameBoard(this.getMoves());
         return getBoardASCIIPicture(board);
     }

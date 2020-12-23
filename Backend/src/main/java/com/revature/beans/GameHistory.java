@@ -1,8 +1,12 @@
 package com.revature.beans;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
+//@Component
 @Entity
 @Table(name="game_history")
 public class GameHistory {

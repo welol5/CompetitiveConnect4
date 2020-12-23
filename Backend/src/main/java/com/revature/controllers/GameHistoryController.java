@@ -31,7 +31,7 @@ public class GameHistoryController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<GameHistory> retrieveAGame(HttpSession session, @PathVariable("id") Long id) {
         GameHistory gameHistory = gameHistoryServ.getById(id);
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok(gameHistory);
     }
 
 }
