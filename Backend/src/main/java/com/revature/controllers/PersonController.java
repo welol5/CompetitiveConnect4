@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@CrossOrigin(origins="http://localhost:4200", allowCredentials="true")
+@CrossOrigin(origins="http://localhost:4200", allowCredentials="true", methods = { RequestMethod.GET,RequestMethod.PUT, RequestMethod.POST, RequestMethod.DELETE })
 @RequestMapping(path="/users")
 public class PersonController {
     private PersonService personServ;
@@ -43,7 +43,11 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> registerUser(HttpSession session, @RequestBody Person person) {
+    public ResponseEntity<Void> registerUser(HttpSession session, @RequestParam("user") String username,
+                                             @RequestParam("pass") String password) {
+        Person person = new Person();
+        person.setUsername(username);
+        person.setPassword(password);
         personServ.addPerson(person);
         return ResponseEntity.ok().build();
     }
