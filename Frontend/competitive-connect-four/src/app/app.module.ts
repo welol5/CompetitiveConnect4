@@ -18,7 +18,7 @@ import { ProfileComponent } from './profile/profile.component';
     AppComponent,
     GameComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
     LoginComponent,
     ProfileComponent
   ],
