@@ -13,12 +13,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { SocketioService } from './services/socketio.service';
 import { GameService } from './services/game.service';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { RegisterComponent } from './register/register.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     GameComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
