@@ -1,11 +1,14 @@
 package com.revature.controllers;
 
+import com.revature.beans.Action;
 import com.revature.beans.Person;
 import com.revature.services.GameStateService;
 import com.revature.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,5 +40,17 @@ public class GameController {
 
         //not implemented
         return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<String> test(HttpSession session){
+//        Person p = new Person();
+//        p.setUsername("username");
+//        p.setPassword("password");
+//        p.setId(0);
+//        p.setRank(2000);
+        String s = "works";
+        System.out.println(s);
+        return ResponseEntity.ok(s);
     }
 }
