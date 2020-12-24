@@ -16,6 +16,7 @@ export class PersonService {
     'Content-Type': 'application/x-www-form-urlencoded'});
   private regHeaders = new HttpHeaders({'Cookie':this.cookieService.get('JSESSIONID'),
     'Content-Type':'application/json'})
+    private headers = new HttpHeaders().set('access-control-allow-origin',"http://localhost:8080/");
 
   constructor(private http: HttpClient,private urlService:UrlService, private cookieService: CookieService) {
     this.personUrl = this.urlService.getUrl() + 'Backend_war_exploded/users';
@@ -48,6 +49,20 @@ export class PersonService {
 
   getLoggedPerson(): Person {
     return this.loggedPerson;
+  }
+  registerPerson(username: string, password: string): Observable<Person> {
+    if (username && password) {
+      const queryParams = `?user=${username}&pass=${password}`;
+      return this.http.post(this.personUrl + queryParams,
+        {headers: this.formHeaders, withCredentials:true}).pipe(
+          map(resp => resp as Person)
+      );
+    } else {
+      return this.http.get(this.personUrl,
+        {withCredentials:true}).pipe(
+          map(resp => resp as Person)
+        );
+    }
   }
 
 }
