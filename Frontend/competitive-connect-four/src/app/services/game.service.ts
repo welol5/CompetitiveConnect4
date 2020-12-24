@@ -1,28 +1,28 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { GameAction } from '../models/game-action';
 import { SocketioService } from './socketio.service';
-import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GameService implements OnInit {
+export class GameService implements OnDestroy{
 
-  private socket;
+  gameID: number;
 
-  constructor(private http: HttpClient,private socketService: SocketioService) {}
-
-  ngOnInit(){
-    console.log('init gameService');
-    this.socket = this.socketService.getSocket();
-    console.log('success');
+  constructor(private http: HttpClient,private socketService: SocketioService) {
+    console.log('construct');
+    this.socketService.openConnection();
   }
 
-  makeMove(row: number, col: number){
-    //let url = this.urlService.getUrl() + '/CompetitiveConnect4_war_exploded/move';
-    //console.log(url);
+  ngOnDestroy(): void {
+    this.socketService.closeConnection();
+  }
 
-    // let 
+  makeMove(gameID: number, row: number, col: number){
+    let gameAction: GameAction = new GameAction();
+    gameAction.makeMove(gameID,row,col);
+    this.socketService.sendMessage(gameAction);
   }
 }

@@ -12,6 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 import { SocketioService } from './services/socketio.service';
 import { GameService } from './services/game.service';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { GameService } from './services/game.service';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SocketIoModule
   ],
   providers: [
     PersonService,
