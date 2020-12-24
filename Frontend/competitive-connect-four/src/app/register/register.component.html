@@ -1,0 +1,16 @@
+<div>
+    <ng-container *ngIf="!loggedPerson">
+
+        <form>
+            <label for="user">Username: </label>
+            <input id="user" name="user" type="text" [(ngModel)]="user" />
+            <label for="pass"> Password: </label>
+            <input id="pass" name="pass" type="password" [(ngModel)]="pass" />
+            <button type="button" id="registerBtn" (click)="register()">Register</button>
+
+        </form>
+
+
+    </ng-container>
+
+</div>>
