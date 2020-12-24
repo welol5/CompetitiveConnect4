@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UrlService } from './services/url.service';
 import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 
@@ -19,8 +20,9 @@ import { ProfileComponent } from './profile/profile.component';
     GameComponent,
     LoginComponent,
     RegisterComponent,
-    LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    HomeComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

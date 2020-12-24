@@ -31,15 +31,19 @@ public class PersonController {
     @PutMapping
     public ResponseEntity<Person> logIn(HttpSession session, @RequestParam("user") String username,
                                         @RequestParam("pass") String password) {
-        Person person = personServ.getPersonByUsername(username);
-        if (person != null) {
-            if (person.getPassword().equals(password)) {
-                session.setAttribute("user", person);
-                return ResponseEntity.ok(person);
+        try {
+            Person person = personServ.getPersonByUsername(username);
+            if (person != null) {
+                if (person.getPassword().equals(password)) {
+                    session.setAttribute("user", person);
+                    return ResponseEntity.ok(person);
+                }
+                return ResponseEntity.badRequest().build();
             }
-            return ResponseEntity.badRequest().build();
+        }catch(Exception e) {
+            return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.notFound().build(); //should never reach this
     }
 
     @PostMapping

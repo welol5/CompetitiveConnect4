@@ -15,10 +15,7 @@ public class PersonServiceImpl implements PersonService {
 	public PersonServiceImpl(PersonDAO p){
 	    personDao = p;
     }
-	/*public PersonServiceImpl() {
-		PersonDAOFactory personDaoFactory = new PersonDAOFactory();
-		personDao = personDaoFactory.getPersonDAO();
-	}*/
+
 
 	@Override
 	public Integer addPerson(Person p) {
