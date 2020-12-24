@@ -1,0 +1,18 @@
+<div>
+    <ng-container *ngIf="loggedPerson; else noUser">
+        <h3>{{ loggedUser.username }}</h3>
+        <label for="username">New Username: </label><br>
+        <input name="username" type="text" [(ngModel)]="newUsername"><br>
+        <button type="button" (click)="updateUsername()">Update Username</button>
+        <br>
+        <label for="password">New Password: </label><br>
+        <input name="password" type="password" [(ngModel)]="newPassword"><br>
+        <input type="password" [(ngModel)]="newPassword2"><br>
+        <button type="button" (click)="updatePassword()">Update Password</button>
+        <br>
+        <h4>{{ loggedUser.profilePicFilePath }}</h4>
+    </ng-container>
+    <ng-template #noUser>
+        You're not logged in.
+    </ng-template>
+</div>
