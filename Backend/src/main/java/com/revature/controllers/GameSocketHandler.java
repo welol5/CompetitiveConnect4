@@ -39,13 +39,14 @@ public class GameSocketHandler extends TextWebSocketHandler {
             boolean foundGame = false;
             for(QueuePosition qp: queue){
                 if(Math.abs(qp.getPlayer().getRank()-action.getPlayer().getRank()) < 100){
-                    System.out.println("foundGame");
+                    System.out.println("Found game");
                     //remove other player from the queue
                     queue.remove(qp);
 
                     foundGame = true;
                     //Found a valid game, creating a new game
                     GameState newGame = new GameState();
+                    newGame.setMoves("");
                     newGame.setPlayer1(action.getPlayer());
                     newGame.setPlayer2(qp.getPlayer());
                     //gameStateService.createNewGame(newGame);
@@ -85,15 +86,36 @@ public class GameSocketHandler extends TextWebSocketHandler {
                 response.setRow(action.getRow());
                 response.setGameID(action.getGameID());
 
-                //respond to player who made the move
-                response.setMessage("ok");
-                TextMessage moveResponseTextMessage = new TextMessage(objectMapper.writeValueAsString(response));
-                session.sendMessage(moveResponseTextMessage);
+                //get the other players session
+                WebSocketSession otherPlayerSession;
+                if(session == game.getPlayer1Session()){
+                    otherPlayerSession = game.getPlayer2Session();
+                } else {
+                    otherPlayerSession = game.getPlayer1Session();
+                }
 
-                //let the other player know a move has been made
-                response.setMessage("move");
-                moveResponseTextMessage = new TextMessage(objectMapper.writeValueAsString(response));
-                session.sendMessage(moveResponseTextMessage);
+                if(GameState.getWinner(game.getGameState()) == null){
+                    //respond to player who made the move
+                    response.setMessage("ok");
+                    TextMessage moveResponseTextMessage = new TextMessage(objectMapper.writeValueAsString(response));
+                    session.sendMessage(moveResponseTextMessage);
+
+                    //let the other player know a move has been made
+                    response.setMessage("move");
+                    moveResponseTextMessage = new TextMessage(objectMapper.writeValueAsString(response));
+                    otherPlayerSession.sendMessage(moveResponseTextMessage);
+                } else {
+                    //there is a winner
+                    //let the winner know
+                    response.setMessage("win");
+                    TextMessage moveResponseTextMessage = new TextMessage(objectMapper.writeValueAsString(response));
+                    session.sendMessage(moveResponseTextMessage);
+
+                    //let the other player know a move has been made and they lost
+                    response.setMessage("lose");
+                    moveResponseTextMessage = new TextMessage(objectMapper.writeValueAsString(response));
+                    otherPlayerSession.sendMessage(moveResponseTextMessage);
+                }
             } else {
                 //idk crash and burn
             }
