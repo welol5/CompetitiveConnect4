@@ -10,12 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { UrlService } from './services/url.service';
 import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
-<<<<<<< HEAD
 import { GameService } from './services/game.service';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-=======
 import { HomeComponent } from './home/home.component';
->>>>>>> ebb590195049b3085ccf1b9271838eb0ac0ec379
 import { RegisterComponent } from './register/register.component';
 
 
