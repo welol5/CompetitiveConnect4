@@ -1,6 +1,8 @@
 package com.revature.config;
 
 import com.revature.controllers.GameSocketHandler;
+import com.revature.services.GameStateService;
+import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

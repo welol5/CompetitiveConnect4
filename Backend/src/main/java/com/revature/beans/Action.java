@@ -3,7 +3,7 @@ package com.revature.beans;
 public class Action {
     private String message;
     private long gameID;
-    private int playerID;
+    private Person player;
     private int col;
     private int row;
 
@@ -39,11 +39,22 @@ public class Action {
         this.message = message;
     }
 
-    public int getPlayerID() {
-        return playerID;
+    public Person getPlayer() {
+        return player;
     }
 
-    public void setPlayerID(int playerID) {
-        this.playerID = playerID;
+    public void setPlayer(Person player) {
+        this.player = player;
+    }
+
+    @Override
+    public String toString() {
+        return "Action{" +
+                "message='" + message + '\'' +
+                ", gameID=" + gameID +
+                ", playerID=" + player +
+                ", col=" + col +
+                ", row=" + row +
+                '}';
     }
 }
