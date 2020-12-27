@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GameService } from '../services/game.service';
 
 @Component({
@@ -6,53 +6,25 @@ import { GameService } from '../services/game.service';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit,OnDestroy {
 
-  board : number[][];
-  player : number = 1;
+  constructor(public gameService: GameService) {
 
-  constructor(private gameService: GameService) {
-
+  }
+  ngOnDestroy(): void {
+    this.gameService.closeConnection();
   }
 
   ngOnInit(): void {
-    this.board = [[0,0,0,0,0,0,0],
-              [0,0,0,0,0,0,0],
-              [0,0,0,0,0,0,0],
-              [0,0,0,0,0,0,0],
-              [0,0,0,0,0,0,0],
-              [0,0,0,0,0,0,0]];
+    this.gameService.openConnection();
   }
 
   makeMove(row: number, col: number): void {
-    console.log("(" + row + "," + col + ")");
-    // if(this.player == 1){
-    //   this.board[row][col] = 1;
-    //   this.player = 2;
-    // } else {
-    //   this.board[row][col] = 2;
-    //   this.player = 1;
-    // }
-    for(let r = this.board.length-1; r >= 0 ; r--){
-      if(this.board[r][col] == 1 || this.board[r][col] == 2){
-        continue;
-      } else {
+    //console.log("click move : " + "(" + row + "," + col + ")");
+    this.gameService.makeMove(-1,row,col);
+  }
 
-        //if(move is legal)
-        this.board[r][col] = this.player;
-        if(this.player == 1){
-          this.player = 2;
-        } else {
-          this.player = 1;
-        }
-        break;
-      }
-    }
-
-    // this.gameService.makeMove(row,col).subscribe(
-    //   response => {
-    //     console.log(response);
-    //   }
-    // );
+  queue(){
+    this.gameService.queueUp();
   }
 }
