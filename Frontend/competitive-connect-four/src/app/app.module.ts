@@ -10,8 +10,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { UrlService } from './services/url.service';
 import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
+import { GameService } from './services/game.service';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+
 
 @NgModule({
   declarations: [
@@ -25,12 +28,14 @@ import { RegisterComponent } from './register/register.component';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SocketIoModule
   ],
   providers: [
     PersonService,
     UrlService,
-    CookieService
+    CookieService,
+    GameService
   ],
   bootstrap: [AppComponent]
 })
