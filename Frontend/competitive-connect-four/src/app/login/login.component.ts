@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     console.log("login shows");
     this.user = '';
     this.pass = '';
-    //this.logIn();
+    this.logIn();
   }
   ngOnChanges() {
     console.log(this.user + ' ' + this.pass);
@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
     this.personService.loginPerson(this.user, this.pass).subscribe(
       resp => {
         this.loggedPerson = resp;
+        this.personService.setLoggedPerson(resp);
         this.logInEvent.emit();
       }
     );
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
     this.personService.logoutPerson().subscribe(
       resp => {
         this.loggedPerson = null;
-        this.router.navigate(['home']);
+        this.goHome();
       }
     );
   }

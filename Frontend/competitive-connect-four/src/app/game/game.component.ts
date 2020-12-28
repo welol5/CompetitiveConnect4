@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Person } from '../models/Person';
+import { PersonService } from '../services/person.service';
 
 @Component({
   selector: 'app-game',
@@ -6,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
-
-  constructor() { }
+  loggedPerson: Person;
+  constructor(private personService: PersonService) { }
 
   ngOnInit(): void {
   }
