@@ -1,17 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+
 import { Person } from '../models/Person';
 import { PersonService } from '../services/person.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { GameService } from '../services/game.service';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
-export class GameComponent implements OnInit {
-  loggedPerson: Person;
-  constructor(private personService: PersonService) { }
 
-  ngOnInit(): void {
+export class GameComponent implements OnInit,OnDestroy {
+  loggedPerson: Person;
+  constructor(public gameService: GameService,private personService: PersonService) {
+
   }
 
+  ngOnDestroy(): void {
+    this.gameService.closeConnection();
+  }
+
+  ngOnInit(): void {
+    this.gameService.openConnection();
+  }
+
+  makeMove(row: number, col: number): void {
+    //console.log("click move : " + "(" + row + "," + col + ")");
+    this.gameService.makeMove(-1,row,col);
+  }
+
+  //this is here till an actual queue button is ready
+  queue(){
+    this.gameService.queueUp();
+  }
 }

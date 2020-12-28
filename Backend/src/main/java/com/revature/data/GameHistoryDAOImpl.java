@@ -82,6 +82,7 @@ public class GameHistoryDAOImpl implements GameHistoryDAO{
         List<GameHistory> gameHistoryList = new ArrayList<>();
         gameHistoryList = g.getResultList();
         s.close();
+        System.out.println(gameHistoryList);
 
         return gameHistoryList;
     }

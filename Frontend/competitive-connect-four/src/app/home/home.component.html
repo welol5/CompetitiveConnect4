@@ -1,2 +1,17 @@
-<p>home works!</p>
+
 <app-queue></app-queue>
+<div>
+    <h1>Today's Top Players</h1>
+    <Table>
+        <tr>
+            <th>Wins</th>
+            <th>Username</th>
+            <th>rank</th>
+        </tr>
+        <tr *ngFor="let winnerObj of leaderboard">
+            <td> {{winnerObj.wins}}</td>
+            <td>{{winnerObj.winner.username}}</td>
+            <td>{{winnerObj.winner.rank}}</td>
+        </tr>
+    </Table>
+</div>>
