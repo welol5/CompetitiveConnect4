@@ -23,7 +23,7 @@ export class GameService{
   private url : string;
 
   constructor(private http: HttpClient, private urlService: UrlService) {
-    this.url = 'ws://localhost:8080/CompetitiveConnect4_war_exploded/gameaction';
+    this.url = 'ws://localhost:8080/Backend_war_exploded/gameaction';
     this.emptyBoard();
 
     this.person = new Person();

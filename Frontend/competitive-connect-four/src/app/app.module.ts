@@ -12,7 +12,6 @@ import { UrlService } from './services/url.service';
 import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 import { GameService } from './services/game.service';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { QueueComponent } from './queue/queue.component';
@@ -31,8 +30,7 @@ import { QueueComponent } from './queue/queue.component';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule,
-    SocketIoModule
+    AppRoutingModule
   ],
   providers: [
     PersonService,

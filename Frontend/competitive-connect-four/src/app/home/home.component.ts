@@ -11,7 +11,7 @@ import { HistoryService } from '../services/history.service';
 })
 export class HomeComponent implements OnInit {
 
-  private leaderboard = [];
+  leaderboard = [];
   private historyArray = [];
   loggedPerson: Person;
   constructor(private historyService: HistoryService,private personService: PersonService) { }
