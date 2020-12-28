@@ -11,6 +11,7 @@ export class GameComponent implements OnInit,OnDestroy {
   constructor(public gameService: GameService) {
 
   }
+
   ngOnDestroy(): void {
     this.gameService.closeConnection();
   }
@@ -24,6 +25,7 @@ export class GameComponent implements OnInit,OnDestroy {
     this.gameService.makeMove(-1,row,col);
   }
 
+  //this is here till an actual queue button is ready
   queue(){
     this.gameService.queueUp();
   }
