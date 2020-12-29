@@ -38,8 +38,7 @@ export class PersonService {
     }
   }
 
-  logoutPerson() {
-    //return this.http.delete(this.personUrl, {headers:this.regHeaders, withCredentials:true}).pipe();
+  logoutPerson(){
     this.myStorage.removeItem('person');
   }
 
@@ -50,7 +49,6 @@ export class PersonService {
   }
   setLoggedPerson(person: Person){
     this.myStorage.setItem('person', JSON.stringify(person));
-    this.loggedPerson = person;
   }
   getLoggedPerson(): Person {
     return JSON.parse(this.myStorage.getItem('person'));

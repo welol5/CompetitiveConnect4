@@ -32,7 +32,6 @@ public class GameSocketHandler extends TextWebSocketHandler {
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         //System.out.println(message.getPayload());
         Action action = objectMapper.readValue(message.getPayload(), Action.class);
-        //System.out.println(action);
 
         if(action.getMessage().equals("queue")){
 

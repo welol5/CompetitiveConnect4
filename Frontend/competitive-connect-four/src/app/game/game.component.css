@@ -1,7 +1,10 @@
 #board-container {
     display: flex;
+    position: initial;
     justify-content: center;
     background-color: lightgray;
+    min-width: 700px;
+    min-height: 700px;
 }
 
 .place {
@@ -32,4 +35,25 @@
     background-color: black;
     min-width: 700px;
     min-height: 600px;
+}
+
+#game-board {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#winner-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(180, 180, 180, 0.5);
+    /*min-width: 700px;
+    min-height: 600px;*/
+}
+
+#overlay-container {
+    position: relative;
+    min-width: 700px;
+    min-height: 700px;
 }

@@ -3,6 +3,7 @@ import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { GameAction } from '../models/game-action';
 import { Person } from '../models/Person';
+import { PersonService } from './person.service';
 import { UrlService } from './url.service';
 
 @Injectable({
@@ -15,6 +16,8 @@ export class GameService{
   //the current player
   private person: Person;
 
+  winner: Person;
+
   board: number[][];
   //true if it is this players turn
   private isTurn: boolean;
@@ -23,7 +26,7 @@ export class GameService{
   //socket url, this is slightly different from the http one
   private url : string;
 
-  constructor(private http: HttpClient, private urlService: UrlService) {
+  constructor(private http: HttpClient, private urlService: UrlService, private personService: PersonService) {
     this.url = 'ws://localhost:8080/Backend_war_exploded/gameaction';
     this.emptyBoard();
     this.paired=false;
@@ -44,6 +47,7 @@ export class GameService{
   //uses the websocket to tell the server you want to enter the matchmaking queue
   queueUp(): void {
     console.log('queue');
+    this.person = this.personService.getLoggedPerson();
     let queueAction: GameAction = new GameAction();
     queueAction.queue(this.person);
     this.sendMessage(queueAction);
@@ -114,7 +118,7 @@ export class GameService{
         //console.log('move', action);
         let row: number = action.row;
         let col: number = action.col;
-        let playerNumber : number = 2;
+        let playerNumber : number = action.player.id;
         this.makeMove(playerNumber,row,col);
       } else if(action.message == 'go'){
         //called at the start of the game if this is player 1
@@ -128,9 +132,16 @@ export class GameService{
         this.paired=true;
       } else if(action.message == 'win'){
         //called if this player won the game
+        this.winner = action.player;
         this.isTurn = false;
       } else if(action.message == 'lose'){
         //called if this player lost the game
+        let row: number = action.row;
+        let col: number = action.col;
+        let playerNumber : number = action.player.id;
+        this.makeMove(playerNumber,row,col);
+        this.winner = action.player;
+        console.log('winner', this.winner);
         this.isTurn = false;
       }
     };
