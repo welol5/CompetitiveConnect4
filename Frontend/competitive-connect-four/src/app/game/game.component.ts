@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 })
 
 export class GameComponent implements OnInit,OnDestroy {
-  paired: boolean;
   loggedPerson: Person;
   constructor(public gameService: GameService,private personService: PersonService, private router: Router) {
 
@@ -23,7 +22,6 @@ export class GameComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(): void {
-    this.paired=false;
     this.gameService.openConnection();
   }
 
@@ -35,7 +33,6 @@ export class GameComponent implements OnInit,OnDestroy {
     //Dequeue code
     this.router.navigate(['home']);
   }
-  //this is here till an actual queue button is ready
   queue(){
     this.gameService.queueUp();
   }
