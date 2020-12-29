@@ -53,9 +53,9 @@ export class PersonService {
   getLoggedPerson(): Person {
     return JSON.parse(this.myStorage.getItem('person'));
   }
-  registerPerson(username: string, password: string): Observable<Person> {
+  registerPerson(username: string, password: string, filepath: string): Observable<Person> {
     if (username && password) {
-      const queryParams = `?user=${username}&pass=${password}`;
+      const queryParams = `?user=${username}&pass=${password}&filepath=${filepath}`;
       return this.http.post(this.personUrl + queryParams,
         {headers: this.formHeaders, withCredentials:true}).pipe(
           map(resp => resp as Person)
@@ -66,6 +66,15 @@ export class PersonService {
           map(resp => resp as Person)
         );
     }
+  }
+  uploadFile(username: string, file: File): Observable<string> {
+    let data: FormData = new FormData();
+    data.append('file', file);
+    return this.http.post(this.personUrl + `/picture/${username}`, data,
+    {withCredentials:true}).pipe(
+      map(resp => resp as string)
+    );
+
   }
 
 }

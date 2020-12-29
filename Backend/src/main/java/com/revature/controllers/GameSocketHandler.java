@@ -117,17 +117,18 @@ public class GameSocketHandler extends TextWebSocketHandler {
                     response.setMessage("win");
                     TextMessage moveResponseTextMessage = new TextMessage(objectMapper.writeValueAsString(response));
                     session.sendMessage(moveResponseTextMessage);
-                    //build game history for DB here
+                    //new game history for DB
                     GameState currentGame = game.getGameState();
                     long gameId = gameStateService.createNewGame(currentGame);
                     currentGame.setId(gameId);
-                    GameHistory gameHistory = gameHistoryServ.newGameHistory(action.getPlayer(), currentGame);
+                    Person winner = action.getPlayer();
+                    GameHistory gameHistory = gameHistoryServ.newGameHistory(winner, currentGame);
                     //calculate points gained or lost
                     Person loser;
-                    if (action.getPlayer() == currentGame.getPlayer1()) {
+                    if (winner.equals(currentGame.getPlayer1())) {
                         loser = currentGame.getPlayer2();
                     } else loser = currentGame.getPlayer1();
-                    personService.calculatePoints(action.getPlayer(), loser);
+                    personService.calculatePoints(winner, loser);
 
                     //let the other player know a move has been made and they lost
                     response.setMessage("lose");

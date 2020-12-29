@@ -32,6 +32,7 @@ export class GameService{
     this.person.username = 'queueTester';
     this.person.rank = 1000;//Math.floor(Math.random() * 1000);
   }
+  
 
   //uses the websocket to send a game move
   sendMove(gameID: number, row: number, col: number){
