@@ -33,11 +33,12 @@ export class GameService{
     this.emptyBoard();
     this.paired=false;
     this.person = new Person();
-    this.person.id = Math.floor(Math.random() * 1000);
+    // this.person.id = Math.floor(Math.random() * 1000);
     this.person.username = 'queueTester';
     this.person.rank = 1000;//Math.floor(Math.random() * 1000);
     this.gametext="";
   }
+  
 
   //uses the websocket to send a game move
   sendMove(gameID: number, row: number, col: number){
@@ -49,6 +50,7 @@ export class GameService{
 
   //uses the websocket to tell the server you want to enter the matchmaking queue
   queueUp(): void {
+    this.person = this.personService.getLoggedPerson();
     console.log('queue');
     this.person = this.personService.getLoggedPerson();
     let queueAction: GameAction = new GameAction();

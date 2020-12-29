@@ -5,9 +5,16 @@ import com.revature.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.time.LocalDateTime;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200", allowCredentials="true", methods = { RequestMethod.GET,RequestMethod.PUT, RequestMethod.POST, RequestMethod.DELETE })
@@ -70,7 +77,7 @@ public class PersonController {
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
-    
+
     @GetMapping(path="/{id}")
     public ResponseEntity<Person> retrievePersonProfile(HttpSession session, @PathVariable("id") Integer id,
     	                             	@RequestBody Person loggedPerson){
@@ -79,14 +86,43 @@ public class PersonController {
     	else if (loggedPerson.getId() == id) return ResponseEntity.ok(loggedPerson);
     	return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
-    
+
     @GetMapping(path="/opponent/{id}")
     public ResponseEntity<Person> retrieveOpponentStats(HttpSession session, @PathVariable("id") Integer id,
     	                             	@RequestBody Person loggedPerson){
     	Person opponent = personServ.getPersonById(id);
     	if (opponent == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     	else return ResponseEntity.ok(opponent);
-    	
+
     }
-    
+
+    @PostMapping(path="/picture/{username}")
+    public ResponseEntity<String> uploadPicture(@RequestParam("file") MultipartFile file, @PathVariable("username") String username) {
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                String rootPath = System.getProperty("catalina.home");
+                File dir = new File(rootPath + File.separator + username);
+                if (!dir.exists())
+                    dir.mkdirs();
+//                System.out.println(file.getContentType().split("\\\\"));
+                System.out.println(file.getContentType().split("/")[0]);
+//                System.out.println(file.getContentType().split("\\\\").toString());
+
+                File serverFile = new File(dir.getAbsolutePath()
+                        + File.separator + username + "." + file.getContentType().split("/")[1]);
+                BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile));
+                stream.write(bytes);
+                stream.close();
+                System.out.println(serverFile.getAbsolutePath());
+                return ResponseEntity.ok(serverFile.getAbsolutePath());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else return ResponseEntity.badRequest().build();
+
+        return null;
+    }
 }
