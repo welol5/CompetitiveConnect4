@@ -76,6 +76,17 @@ public class GameState {
                 '}';
     }
 
+    public boolean makeMove(int col){
+        String moveList = moves + col;
+        try{
+            BoardASCIIPicture(moveList);
+            moves += col;
+            return true;
+        } catch (GameRuleException e){
+            return false;
+        }
+    }
+
     private static String getBoardASCIIPicture(int[][] board) throws GameRuleException{
         String boardString = "";
 
@@ -91,8 +102,8 @@ public class GameState {
         return boardString;
     }
 
-    public String BoardASCIIPicture() throws GameRuleException{
-        int[][] board = generateGameBoard(this.getMoves());
+    public static String BoardASCIIPicture(String moveList) throws GameRuleException{
+        int[][] board = generateGameBoard(moveList);
         return getBoardASCIIPicture(board);
     }
 

@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'competitive-connect-four';
+
+  setLogin() {
+    console.log('user logged in');
+  }
 }
