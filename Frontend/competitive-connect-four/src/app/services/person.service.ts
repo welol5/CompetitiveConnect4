@@ -12,7 +12,7 @@ import { UrlService } from './url.service';
 export class PersonService {
   private loggedPerson: Person;
   private personUrl: string;
-  private myStorage = window.sessionStorage;
+  private myStorage = window.localStorage;
   private formHeaders = new HttpHeaders({'Cookie':this.cookieService.get('JSESSIONID'),
     'Content-Type': 'application/x-www-form-urlencoded'});
   private regHeaders = new HttpHeaders({'Cookie':this.cookieService.get('JSESSIONID'),
@@ -38,8 +38,8 @@ export class PersonService {
     }
   }
 
-  logoutPerson(): Observable<object> {
-    return this.http.delete(this.personUrl, {headers:this.regHeaders, withCredentials:true}).pipe();
+  logoutPerson(){
+    this.myStorage.removeItem('person');
   }
 
   updatePerson(updatedPerson: Person): Observable<object> {
@@ -48,11 +48,10 @@ export class PersonService {
       {headers:this.regHeaders, withCredentials:true}).pipe();
   }
   setLoggedPerson(person: Person){
-    //this.myStorage.setItem('person', JSON.stringify(person));
-    this.loggedPerson = person;
+    this.myStorage.setItem('person', JSON.stringify(person));
   }
   getLoggedPerson(): Person {
-    return this.loggedPerson;
+    return JSON.parse(this.myStorage.getItem('person'));
   }
   registerPerson(username: string, password: string): Observable<Person> {
     if (username && password) {
