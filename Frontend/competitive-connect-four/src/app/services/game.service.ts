@@ -12,6 +12,8 @@ import { UrlService } from './url.service';
 export class GameService{
 
   paired:boolean;
+  gametext:String;
+
   gameID: number;
   //the current player
   private person: Person;
@@ -34,6 +36,7 @@ export class GameService{
     this.person.id = Math.floor(Math.random() * 1000);
     this.person.username = 'queueTester';
     this.person.rank = 1000;//Math.floor(Math.random() * 1000);
+    this.gametext="";
   }
 
   //uses the websocket to send a game move
@@ -133,6 +136,7 @@ export class GameService{
       } else if(action.message == 'win'){
         //called if this player won the game
         this.winner = action.player;
+        this.gametext="WINNER";
         this.isTurn = false;
       } else if(action.message == 'lose'){
         //called if this player lost the game
@@ -142,6 +146,7 @@ export class GameService{
         this.makeMove(playerNumber,row,col);
         this.winner = action.player;
         console.log('winner', this.winner);
+        this.gametext="LOSER";
         this.isTurn = false;
       }
     };
