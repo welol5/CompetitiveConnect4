@@ -12,21 +12,25 @@ export class ProfileComponent implements OnInit {
   newUsername: string;
   newPassword: string;
   newPassword2: string;
-
+  editPerson: boolean;
 
   constructor(private personService: PersonService) { }
 
   ngOnInit(): void {
-    this.personService.loginPerson(null,null).subscribe(
-      resp => {
-        this.loggedPerson = resp;
-      }
-    );
+    // this.personService.loginPerson(null,null).subscribe(
+    //   resp => {
+    //     this.loggedPerson = resp;
+    //   }
+    // );
+    this.loggedPerson = this.personService.getLoggedPerson();
+    console.log(this.loggedPerson);
+    
   }
 
   updateUsername() {
     if (this.newUsername) {
       this.loggedPerson.username = this.newUsername;
+      console.log(this.loggedPerson);
       this.personService.updatePerson(this.loggedPerson).subscribe();
     } else {
       alert('You didn\'t enter a username.');

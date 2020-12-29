@@ -1,6 +1,16 @@
 <div>
     <ng-container *ngIf="loggedPerson; else noUser">
-        <h3>{{ loggedUser.username }}</h3>
+        <h3>Username: {{ loggedPerson.username }}</h3>
+        <h3>Rank: {{ loggedPerson.rank }}</h3>
+        <h3>ID: {{ loggedPerson.id }}</h3>
+        
+        <button type="button" id="editProfileBtn" (click)="editPerson=!editPerson">Toggle Edit Profile</button>
+    </ng-container>
+    <ng-template #noUser>
+        You're not logged in.
+    </ng-template>
+    <ng-container *ngIf="editPerson">
+        <h3>Edit profile for: {{ loggedPerson.username }}</h3>
         <label for="username">New Username: </label><br>
         <input name="username" type="text" [(ngModel)]="newUsername"><br>
         <button type="button" (click)="updateUsername()">Update Username</button>
@@ -10,9 +20,7 @@
         <input type="password" [(ngModel)]="newPassword2"><br>
         <button type="button" (click)="updatePassword()">Update Password</button>
         <br>
-        <h4>{{ loggedUser.profilePicFilePath }}</h4>
+        <h4>{{ loggedPerson.profilePicFilePath }}</h4>
     </ng-container>
-    <ng-template #noUser>
-        You're not logged in.
-    </ng-template>
+    
 </div>
