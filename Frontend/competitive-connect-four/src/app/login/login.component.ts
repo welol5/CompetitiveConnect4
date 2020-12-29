@@ -41,10 +41,11 @@ export class LoginComponent implements OnInit {
   }
   logOut() {
     this.personService.logoutPerson();
-        this.loggedPerson = null;
-        this.goHome();
+    this.loggedPerson = null;
+    this.goHome();
   }
   goHome(){
     this.router.navigate(['home']);
   }
+
 }

@@ -1,4 +1,5 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { Person } from '../models/Person';
 import { PersonService } from '../services/person.service';
 
@@ -9,21 +10,23 @@ import { PersonService } from '../services/person.service';
 })
 export class QueueComponent implements OnInit {
   loggedPerson: Person;
-
-  constructor(private personService: PersonService) { }
+  error:String;
+  constructor(private personService: PersonService, private router: Router) { }
   
   ngOnInit(): void {
-    /*console.log(this.loggedPerson);
-    this.personService.loginPerson(null,null).subscribe(
-      resp => {
-        this.loggedPerson = resp;
-      }
-    );*/
+    this.error="";
     this.loggedPerson = this.personService.getLoggedPerson();
     console.log("queue button: ");
     console.log(this.loggedPerson);
   }
-
+  queue(){
+    this.ngOnInit();
+    if(this.loggedPerson){
+      this.router.navigate(['game']);
+    }else{
+      this.error="You must be logged in to queue";
+    }
+  }
   printPerson(){
       this.ngOnInit();
   }

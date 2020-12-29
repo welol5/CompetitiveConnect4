@@ -11,9 +11,14 @@ import { UrlService } from './url.service';
 })
 export class GameService{
 
+  paired:boolean;
+  gametext:String;
+
   gameID: number;
   //the current player
   private person: Person;
+
+  winner: Person;
 
   board: number[][];
   //true if it is this players turn
@@ -26,11 +31,12 @@ export class GameService{
   constructor(private http: HttpClient, private urlService: UrlService, private personService: PersonService) {
     this.url = 'ws://localhost:8080/Backend_war_exploded/gameaction';
     this.emptyBoard();
-
+    this.paired=false;
     this.person = new Person();
     // this.person.id = Math.floor(Math.random() * 1000);
     this.person.username = 'queueTester';
     this.person.rank = 1000;//Math.floor(Math.random() * 1000);
+    this.gametext="";
   }
   
 
@@ -50,6 +56,8 @@ export class GameService{
     let queueAction: GameAction = new GameAction();
     queueAction.queue(this.person);
     this.sendMessage(queueAction);
+    this.paired=false;
+    this.emptyBoard();
   }
 
   emptyBoard(): void {
@@ -98,6 +106,7 @@ export class GameService{
 
     this.webSocket.onopen = (event) => {
       //console.log('Open: ', event);
+      this.queueUp();
     };
 
     //this runs any time a message is recivced from the server
@@ -120,15 +129,26 @@ export class GameService{
         //called at the start of the game if this is player 1
         this.gameID = action.gameID;
         this.isTurn = true;
+        this.paired=true;
       } else if(action.message == 'wait'){
         //called at the start of the game if this is player 2
         this.gameID = action.gameID;
         this.isTurn = false;
+        this.paired=true;
       } else if(action.message == 'win'){
         //called if this player won the game
+        this.winner = action.player;
+        this.gametext="WINNER";
         this.isTurn = false;
       } else if(action.message == 'lose'){
         //called if this player lost the game
+        let row: number = action.row;
+        let col: number = action.col;
+        let playerNumber : number = action.player.id;
+        this.makeMove(playerNumber,row,col);
+        this.winner = action.player;
+        console.log('winner', this.winner);
+        this.gametext="LOSER";
         this.isTurn = false;
       }
     };
