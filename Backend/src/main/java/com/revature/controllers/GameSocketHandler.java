@@ -1,11 +1,11 @@
 package com.revature.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.beans.Action;
-import com.revature.beans.ActiveGame;
-import com.revature.beans.GameState;
-import com.revature.beans.QueuePosition;
+import com.revature.beans.*;
+import com.revature.services.GameHistoryService;
+import com.revature.services.GameHistoryServiceImpl;
 import com.revature.services.GameStateService;
+import com.revature.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -15,14 +15,20 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.util.*;
 
 public class GameSocketHandler extends TextWebSocketHandler {
-
+    private @Autowired GameHistoryService gameHistoryServ;
+    private @Autowired PersonService personService;
     private final Map<Long, ActiveGame> activeGames = new HashMap<>();
     private final List<QueuePosition> queue = new ArrayList<>();
     private final QueuePosition.RankComparitor comparitor = new QueuePosition.RankComparitor();
     private ObjectMapper objectMapper = new ObjectMapper();
 
     private @Autowired GameStateService gameStateService;
-
+//    @Autowired
+//    public GameSocketHandler(GameHistoryService g, GameStateService gs, PersonService p) {
+//        gameHistoryServ = g;
+//        gameStateService = gs;
+//        personService = p;
+//    }
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         //System.out.println("Connection made");
@@ -93,8 +99,10 @@ public class GameSocketHandler extends TextWebSocketHandler {
                 } else {
                     otherPlayerSession = game.getPlayer1Session();
                 }
-
+                System.out.println(session);
+                System.out.println(otherPlayerSession);
                 if(GameState.getWinner(game.getGameState()) == null){
+
                     //respond to player who made the move
                     response.setMessage("ok");
                     TextMessage moveResponseTextMessage = new TextMessage(objectMapper.writeValueAsString(response));
@@ -110,6 +118,17 @@ public class GameSocketHandler extends TextWebSocketHandler {
                     response.setMessage("win");
                     TextMessage moveResponseTextMessage = new TextMessage(objectMapper.writeValueAsString(response));
                     session.sendMessage(moveResponseTextMessage);
+                    //build game history for DB here
+                    GameState currentGame = game.getGameState();
+                    long gameId = gameStateService.createNewGame(currentGame);
+                    currentGame.setId(gameId);
+                    GameHistory gameHistory = gameHistoryServ.newGameHistory(action.getPlayer(), currentGame);
+                    //calculate points gained or lost
+                    Person loser;
+                    if (action.getPlayer() == currentGame.getPlayer1()) {
+                        loser = currentGame.getPlayer2();
+                    } else loser = currentGame.getPlayer1();
+                    personService.calculatePoints(action.getPlayer(), loser);
 
                     //let the other player know a move has been made and they lost
                     response.setMessage("lose");

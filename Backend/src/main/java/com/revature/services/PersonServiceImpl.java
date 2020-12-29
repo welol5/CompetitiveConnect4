@@ -48,5 +48,18 @@ public class PersonServiceImpl implements PersonService {
 	public void deletePerson(Person p) {
 		personDao.delete(p);
 	}
+	public void calculatePoints(Person win, Person lose) {
+		Person winner = win;
+		Person loser = lose;
+		if (winner.getRank() > loser.getRank()) {
+			winner.setRank(winner.getRank() + 20);
+			loser.setRank(loser.getRank() - 20);
+		} else {
+			winner.setRank(winner.getRank() + 25);
+			loser.setRank(loser.getRank() - 25);
+		}
+		personDao.update(winner);
+		personDao.update(loser);
+	}
 
 }
