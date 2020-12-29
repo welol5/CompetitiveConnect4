@@ -12,6 +12,7 @@ import { UrlService } from './url.service';
 export class PersonService {
   private loggedPerson: Person;
   private personUrl: string;
+  private myStorage = window.sessionStorage;
   private formHeaders = new HttpHeaders({'Cookie':this.cookieService.get('JSESSIONID'),
     'Content-Type': 'application/x-www-form-urlencoded'});
   private regHeaders = new HttpHeaders({'Cookie':this.cookieService.get('JSESSIONID'),
@@ -46,7 +47,10 @@ export class PersonService {
     return this.http.put(this.personUrl + this.loggedPerson.id, updatedPerson, 
       {headers:this.regHeaders, withCredentials:true}).pipe();
   }
-
+  setLoggedPerson(person: Person){
+    //this.myStorage.setItem('person', JSON.stringify(person));
+    this.loggedPerson = person;
+  }
   getLoggedPerson(): Person {
     return this.loggedPerson;
   }

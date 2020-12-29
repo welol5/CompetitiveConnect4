@@ -7,13 +7,14 @@ import { LoginComponent } from './login/login.component';
 import { PersonService } from './services/person.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
 import { UrlService } from './services/url.service';
 import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 import { GameService } from './services/game.service';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { QueueComponent } from './queue/queue.component';
 
 
 @NgModule({
@@ -22,14 +23,14 @@ import { RegisterComponent } from './register/register.component';
     GameComponent,
     LoginComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    QueueComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule,
-    SocketIoModule
+    AppRoutingModule
   ],
   providers: [
     PersonService,

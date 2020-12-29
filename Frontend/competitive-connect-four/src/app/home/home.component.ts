@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Person } from '../models/Person';
+import { PersonService } from '../services/person.service';
 
 import { HistoryService } from '../services/history.service';
 
@@ -8,11 +10,11 @@ import { HistoryService } from '../services/history.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  private leaderboard = [];
-  private historyArray = [];
-  
-  constructor(private historyService: HistoryService) { }
 
+  leaderboard = [];
+  private historyArray = [];
+  loggedPerson: Person;
+  constructor(private historyService: HistoryService,private personService: PersonService) { }
   ngOnInit(): void {
     this.generateLeaderboard();
     // console.log(this.leaderboard);

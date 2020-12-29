@@ -1,3 +1,6 @@
+
+import { Person } from '../models/Person';
+import { PersonService } from '../services/person.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GameService } from '../services/game.service';
 
@@ -6,9 +9,10 @@ import { GameService } from '../services/game.service';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
-export class GameComponent implements OnInit,OnDestroy {
 
-  constructor(public gameService: GameService) {
+export class GameComponent implements OnInit,OnDestroy {
+  loggedPerson: Person;
+  constructor(public gameService: GameService,private personService: PersonService) {
 
   }
 
