@@ -3,6 +3,7 @@ import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { GameAction } from '../models/game-action';
 import { Person } from '../models/Person';
+import { PersonService } from './person.service';
 import { UrlService } from './url.service';
 
 @Injectable({
@@ -22,7 +23,7 @@ export class GameService{
   //socket url, this is slightly different from the http one
   private url : string;
 
-  constructor(private http: HttpClient, private urlService: UrlService) {
+  constructor(private http: HttpClient, private urlService: UrlService, private personService: PersonService) {
     this.url = 'ws://localhost:8080/Backend_war_exploded/gameaction';
     this.emptyBoard();
 
@@ -43,6 +44,7 @@ export class GameService{
   //uses the websocket to tell the server you want to enter the matchmaking queue
   queueUp(): void {
     console.log('queue');
+    this.person = this.personService.getLoggedPerson();
     let queueAction: GameAction = new GameAction();
     queueAction.queue(this.person);
     this.sendMessage(queueAction);
@@ -110,7 +112,7 @@ export class GameService{
         //console.log('move', action);
         let row: number = action.row;
         let col: number = action.col;
-        let playerNumber : number = 2;
+        let playerNumber : number = action.player.id;
         this.makeMove(playerNumber,row,col);
       } else if(action.message == 'go'){
         //called at the start of the game if this is player 1
