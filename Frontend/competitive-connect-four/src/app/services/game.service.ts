@@ -45,6 +45,7 @@ export class GameService{
   queueUp(): void {
     this.person = this.personService.getLoggedPerson();
     console.log('queue');
+    this.person = this.personService.getLoggedPerson();
     let queueAction: GameAction = new GameAction();
     queueAction.queue(this.person);
     this.sendMessage(queueAction);
@@ -112,7 +113,7 @@ export class GameService{
         //console.log('move', action);
         let row: number = action.row;
         let col: number = action.col;
-        let playerNumber : number = 2;
+        let playerNumber : number = action.player.id;
         this.makeMove(playerNumber,row,col);
       } else if(action.message == 'go'){
         //called at the start of the game if this is player 1

@@ -16,6 +16,7 @@ export class GameAction {
         this.col = col;
         this.message = 'move';
         this.gameID = gameID;
+        this.player = person;
     }
     //helpful client-side "constructor"
     queue(person: Person): void{
