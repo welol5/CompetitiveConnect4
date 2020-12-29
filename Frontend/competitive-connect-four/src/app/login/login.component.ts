@@ -26,6 +26,9 @@ export class LoginComponent implements OnInit {
     console.log(this.user + ' ' + this.pass);
   }
   logIn() {
+    if(this.personService.getLoggedPerson()){
+      this.loggedPerson=this.personService.getLoggedPerson();
+    }else{
     console.log(this.user + ' ' + this.pass);
     this.personService.loginPerson(this.user, this.pass).subscribe(
       resp => {
@@ -34,14 +37,12 @@ export class LoginComponent implements OnInit {
         this.logInEvent.emit();
       }
     );
+    }
   }
   logOut() {
-    this.personService.logoutPerson().subscribe(
-      resp => {
+    this.personService.logoutPerson();
         this.loggedPerson = null;
         this.goHome();
-      }
-    );
   }
   goHome(){
     this.router.navigate(['home']);
