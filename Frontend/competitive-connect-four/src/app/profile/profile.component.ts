@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { GameHistory } from '../models/game-history';
 import { Person } from '../models/person';
+import { HistoryService } from '../services/history.service';
 import { PersonService } from '../services/person.service';
 
 @Component({
@@ -13,8 +15,9 @@ export class ProfileComponent implements OnInit {
   newPassword: string;
   newPassword2: string;
   editPerson: boolean;
+  gameHistory: GameHistory;
 
-  constructor(private personService: PersonService) { }
+  constructor(private personService: PersonService, private historyService: HistoryService) { }
 
   ngOnInit(): void {
     // this.personService.loginPerson(null,null).subscribe(
@@ -23,14 +26,15 @@ export class ProfileComponent implements OnInit {
     //   }
     // );
     this.loggedPerson = this.personService.getLoggedPerson();
-    console.log(this.loggedPerson);
+    // console.log(this.loggedPerson);
+    // this.gameHistory = this.historyService.getGameHistory();
     
   }
 
   updateUsername() {
     if (this.newUsername) {
       this.loggedPerson.username = this.newUsername;
-      console.log(this.loggedPerson);
+      // console.log(this.loggedPerson);
       this.personService.updatePerson(this.loggedPerson).subscribe();
     } else {
       alert('You didn\'t enter a username.');
