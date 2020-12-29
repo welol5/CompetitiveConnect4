@@ -15,6 +15,8 @@ export class GameService{
   //the current player
   private person: Person;
 
+  winner: Person;
+
   board: number[][];
   //true if it is this players turn
   private isTurn: boolean;
@@ -124,9 +126,16 @@ export class GameService{
         this.isTurn = false;
       } else if(action.message == 'win'){
         //called if this player won the game
+        this.winner = action.player;
         this.isTurn = false;
       } else if(action.message == 'lose'){
         //called if this player lost the game
+        let row: number = action.row;
+        let col: number = action.col;
+        let playerNumber : number = action.player.id;
+        this.makeMove(playerNumber,row,col);
+        this.winner = action.player;
+        console.log('winner', this.winner);
         this.isTurn = false;
       }
     };

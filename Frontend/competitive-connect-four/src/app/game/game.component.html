@@ -1,20 +1,28 @@
 <button type="button" (click)="queue()">test queue</button>
 <div id="board-container">
-    <div id="game-board">
-        <table id="board">
-            <tr *ngFor="let row of this.gameService.board | keyvalue">
-                <td *ngFor="let col of row.value | keyvalue" (click)="makeMove(row.key,col.key)">
-                    <div *ngIf="col.value == 0" class="place player0">
-                        <!-- {{col.value}} --> 
-                    </div>
-                    <div *ngIf="col.value == 1" class="place player1">
-                        <!-- {{col.value}} --> 
-                    </div>
-                    <div *ngIf="col.value == 2" class="place player2">
-                        <!-- {{col.value}} --> 
-                    </div>
-                </td>
-            </tr>
-        </table>
+    <div id="overlay-container">
+        <div id="game-board">
+            <table id="board">
+                <tr *ngFor="let row of this.gameService.board | keyvalue">
+                    <td *ngFor="let col of row.value | keyvalue" (click)="makeMove(row.key,col.key)">
+                        <div *ngIf="col.value == 0" class="place player0">
+                            <!-- {{col.value}} --> 
+                        </div>
+                        <div *ngIf="col.value == 1" class="place player1">
+                            <!-- {{col.value}} --> 
+                        </div>
+                        <div *ngIf="col.value == 2" class="place player2">
+                            <!-- {{col.value}} --> 
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    
+        <div id="winner-area" *ngIf="this.gameService.winner != null" [style]="'min-width:' + boardWidth + 'px;' + 'min-height:' + boardHeight + 'px;'">
+            <p>winner</p>
+            <button type="button">Home</button>
+            <button type="button">Play again</button>
+        </div>
     </div>
 </div>
