@@ -39,17 +39,22 @@ export class GameComponent implements OnInit,OnDestroy,AfterViewChecked {
   }
   dequeue(){
     //Dequeue code
-    this.router.navigate(['home']);
+    this.goHome();
   }
   queue(){
     this.gameService.queueUp();
   }
 
   playAgain(){
-    console.log('play again');
+   // console.log('play again');
+   this.gameService.paired=false;
+   this.gameService.winner = null;
+   this.gameService.queueUp();
   }
 
   goHome(){
-    console.log('home');
+    //console.log('home');
+    this.gameService.winner = null;
+    this.router.navigate(['home']);
   }
 }

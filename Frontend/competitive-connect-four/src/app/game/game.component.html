@@ -27,8 +27,8 @@
     
         <div id="winner-area" *ngIf="this.gameService.winner != null" [style]="'min-width:' + boardWidth + 'px;' + 'min-height:' + boardHeight + 'px;'">
             <p>winner</p>
-            <button type="button">Home</button>
-            <button type="button">Play again</button>
+            <button type="button" (click)="goHome()">Home</button>
+            <button type="button" (click)="playAgain()">Play again</button>
         </div>
     </div>
 </div>
