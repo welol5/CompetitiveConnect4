@@ -3,6 +3,7 @@ import { Person } from '../models/Person';
 import { PersonService } from '../services/person.service';
 import { AfterViewChecked, Component, OnDestroy, OnInit } from '@angular/core';
 import { GameService } from '../services/game.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -14,8 +15,7 @@ export class GameComponent implements OnInit,OnDestroy,AfterViewChecked {
   loggedPerson: Person;
   boardWidth: number;
   boardHeight: number;
-  constructor(public gameService: GameService,private personService: PersonService) {
-
+  constructor(public gameService: GameService,private personService: PersonService, private router: Router) {
   }
   ngAfterViewChecked(): void {
     let gameElement : HTMLElement = document.getElementById('game-board') as HTMLElement;
@@ -37,17 +37,24 @@ export class GameComponent implements OnInit,OnDestroy,AfterViewChecked {
     //console.log("click move : " + "(" + row + "," + col + ")");
     this.gameService.makeMove(-1,row,col);
   }
-
-  //this is here till an actual queue button is ready
+  dequeue(){
+    //Dequeue code
+    this.goHome();
+  }
   queue(){
     this.gameService.queueUp();
   }
 
   playAgain(){
-    console.log('play again');
+   // console.log('play again');
+   this.gameService.paired=false;
+   this.gameService.winner = null;
+   this.gameService.queueUp();
   }
 
   goHome(){
-    console.log('home');
+    //console.log('home');
+    this.gameService.winner = null;
+    this.router.navigate(['home']);
   }
 }
