@@ -15,7 +15,7 @@ import { GameService } from './services/game.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { QueueComponent } from './queue/queue.component';
-
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import { QueueComponent } from './queue/queue.component';
     LoginComponent,
     HomeComponent,
     RegisterComponent,
-    QueueComponent
+    QueueComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

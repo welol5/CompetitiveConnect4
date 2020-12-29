@@ -70,4 +70,23 @@ public class PersonController {
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
+    
+    @GetMapping(path="/{id}")
+    public ResponseEntity<Person> retrievePersonProfile(HttpSession session, @PathVariable("id") Integer id,
+    	                             	@RequestBody Person loggedPerson){
+    	Person person = personServ.getPersonById(id);
+    	if (person == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    	else if (loggedPerson.getId() == id) return ResponseEntity.ok(loggedPerson);
+    	return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+    
+    @GetMapping(path="/opponent/{id}")
+    public ResponseEntity<Person> retrieveOpponentStats(HttpSession session, @PathVariable("id") Integer id,
+    	                             	@RequestBody Person loggedPerson){
+    	Person opponent = personServ.getPersonById(id);
+    	if (opponent == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    	else return ResponseEntity.ok(opponent);
+    	
+    }
+    
 }

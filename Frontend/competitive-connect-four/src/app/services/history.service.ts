@@ -5,12 +5,13 @@ import { map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { UrlService } from './url.service';
 import { GameHistory } from '../models/game-history';
-import { Person } from '../models/Person';
+
 @Injectable({
   providedIn: 'root'
 })
 export class HistoryService {
   private historyUrl: string;
+  private myStorage = window.localStorage;
   // private historyArray: GameHistory[];
   // private 
   // private ;
@@ -30,7 +31,11 @@ export class HistoryService {
       map(resp => resp as GameHistory[])
     );
   }
+  // getGameHistory(): GameHistory {
+  //   let gameHistoryArray = [];
 
+  //   return JSON.parse(this.myStorage.getItem('gameHistory'));
+  // }
   getLeaderboard() {
     let historyArray = [];
     let leaderboardBuilder= [];
