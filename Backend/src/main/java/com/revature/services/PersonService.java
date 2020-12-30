@@ -14,4 +14,5 @@ public interface PersonService {
 	// delete
 	public void deletePerson(Person p);
     public void updateUsername(Person p, String newUsername);
+	public void calculatePoints(Person winner, Person loser);
 }
