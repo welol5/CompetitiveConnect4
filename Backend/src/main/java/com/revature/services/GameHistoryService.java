@@ -10,5 +10,5 @@ public interface GameHistoryService {
     public GameHistory newGameHistory(Person winner, GameState game);
     public GameHistory getById(Long id);
     public List<GameHistory> getDailyLeaderboard();
-    public List<GameHistory> getByPersonId(Integer id);
+    public List<GameHistory> getByPersonId(Long id);
 }

@@ -40,5 +40,8 @@ public class GameHistoryController {
     public ResponseEntity<List<GameHistory>> getDailyLeaderboard() {
         return ResponseEntity.ok(gameHistoryServ.getDailyLeaderboard());
     }
-
+    @GetMapping(path = "/users/{id}")
+    public ResponseEntity<List<GameHistory>> retrieveAllGamesById(HttpSession session, @PathVariable("id") Long id) {
+        return ResponseEntity.ok(gameHistoryServ.getByPersonId(id));
+    }
 }

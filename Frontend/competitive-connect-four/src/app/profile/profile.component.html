@@ -15,7 +15,7 @@
         <h3>Rank: {{ loggedPerson.rank }}</h3>
         
         <button type="button" id="editProfileBtn" (click)="editPerson=!editPerson">Toggle Edit Profile</button>
-        <!-- <button type="button" id="viewPastGames" (click)="viewGamesHistory=!viewGamesHistory">View Games History</button> -->
+        <button type="button" id="viewPastGames" (click)="viewHistory()">View Games History</button>
     </ng-container>
     <ng-template #noUser>
         You're not logged in.
@@ -33,8 +33,20 @@
         <br>
         <h4>{{ loggedPerson.profilePicFilePath }}</h4>
     </ng-container>
-    <!-- <ng-container *ngIf="viewGamesHistory">
+    <ng-container>
         <h3>View history for: {{ loggedPerson.username }}</h3>
-       
-    </ng-container> -->
+       <table>
+           <tr>   
+                <th>Game ID</th>
+                <th>Date Played</th>
+                <th>Winning Player ID</th>
+         </tr>
+          <tr *ngFor="let game of gameHistoryArray">
+                <td> {{ game.id }}</td>
+                <td>{{ game.timestamp }}</td>
+                <td>{{ game.winner }}</td>
+        </tr>
+    </table>
+
+    </ng-container>
 </div>
