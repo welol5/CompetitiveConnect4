@@ -22,4 +22,10 @@ describe('QueueComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should be unable to queue', () => {
+    component.queue();
+    let errorMessage = document.getElementById('error').innerHTML;
+    expect(errorMessage).toBe('You must be logged in to queue');
+  });
 });
