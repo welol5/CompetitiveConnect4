@@ -98,12 +98,14 @@ public class GameSocketHandler extends TextWebSocketHandler {
                 //tell player 1 to make a move
                 Action player1StartAction = new Action();
                 player1StartAction.setMessage("go");
+                player1StartAction.setPlayer(qp.getPlayer());
                 TextMessage p1Command = new TextMessage(objectMapper.writeValueAsString(player1StartAction));
                 session.sendMessage(p1Command);
 
                 //tell player 2 to wait
                 Action player2WaitAction = new Action();
                 player2WaitAction.setMessage("wait");
+                player2WaitAction.setPlayer(person);
                 TextMessage p2Command = new TextMessage(objectMapper.writeValueAsString(player2WaitAction));
                 qp.getPlayerSession().sendMessage(p2Command);
                 break;

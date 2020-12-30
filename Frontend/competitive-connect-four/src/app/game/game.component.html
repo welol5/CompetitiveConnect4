@@ -1,13 +1,13 @@
 
 <ng-container *ngIf="!this.gameService.paired; else ingame">
 <button type="button" (click)="dequeue()">Dequeueue</button>
-<button type="button" (click)="queue()">test queue</button>
 <div><h3>In queue</h3></div>
 </ng-container>
 <ng-template #ingame>
 <div id="board-container">
     <div id="overlay-container">
         <div id="game-board">
+            <h3>Opponent:{{this.gameService.opponent.username}} &nbsp;&nbsp;&nbsp; Skill Rank:{{this.gameService.opponent.rank}} </h3>
             <table id="board">
                 <tr *ngFor="let row of this.gameService.board | keyvalue">
                     <td *ngFor="let col of row.value | keyvalue" (click)="makeMove(row.key,col.key)">

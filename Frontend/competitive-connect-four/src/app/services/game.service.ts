@@ -19,7 +19,7 @@ export class GameService{
   private person: Person;
 
   winner: Person;
-
+  opponent: Person;
   board: number[][];
   //true if it is this players turn
   private isTurn: boolean;
@@ -37,6 +37,7 @@ export class GameService{
     this.person.username = 'queueTester';
     this.person.rank = 1000;//Math.floor(Math.random() * 1000);
     this.gametext="";
+    this.opponent=null;
   }
   
 
@@ -128,11 +129,13 @@ export class GameService{
       } else if(action.message == 'go'){
         //called at the start of the game if this is player 1
         this.gameID = action.gameID;
+        this.opponent=action.player;
         this.isTurn = true;
         this.paired=true;
       } else if(action.message == 'wait'){
         //called at the start of the game if this is player 2
         this.gameID = action.gameID;
+        this.opponent=action.player;
         this.isTurn = false;
         this.paired=true;
       } else if(action.message == 'win'){
