@@ -4,9 +4,15 @@
         <form>
             <label for="user">Username: </label>
             <input id="user" name="user" type="text" [(ngModel)]="user" />
+            <br>
             <label for="pass"> Password: </label>
             <input id="pass" name="pass" type="password" [(ngModel)]="pass" />
+            <br>
+            <!-- <label for="upload"> Picture: </label>
+            <input #upload id="upload" type="file" enctype="multipart/form-data" accept="Image/*" (change)="attach(upload)"/>
+            <br> -->
             <button type="button" id="registerBtn" (click)="register()">Register</button>
+            
 
         </form>
 

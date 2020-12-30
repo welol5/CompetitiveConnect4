@@ -11,12 +11,15 @@ import { UrlService } from './url.service';
 })
 export class GameService{
 
+  paired:boolean;
+  gametext:String;
+
   gameID: number;
   //the current player
   private person: Person;
 
   winner: Person;
-
+  opponent: Person;
   board: number[][];
   //true if it is this players turn
   private isTurn: boolean;
@@ -28,12 +31,15 @@ export class GameService{
   constructor(private http: HttpClient, private urlService: UrlService, private personService: PersonService) {
     this.url = 'ws://localhost:8080/Backend_war_exploded/gameaction';
     this.emptyBoard();
-
+    this.paired=false;
     this.person = new Person();
-    this.person.id = Math.floor(Math.random() * 1000);
+    // this.person.id = Math.floor(Math.random() * 1000);
     this.person.username = 'queueTester';
     this.person.rank = 1000;//Math.floor(Math.random() * 1000);
+    this.gametext="";
+    this.opponent=null;
   }
+  
 
   //uses the websocket to send a game move
   sendMove(gameID: number, row: number, col: number){
@@ -45,11 +51,14 @@ export class GameService{
 
   //uses the websocket to tell the server you want to enter the matchmaking queue
   queueUp(): void {
+    this.person = this.personService.getLoggedPerson();
     console.log('queue');
     this.person = this.personService.getLoggedPerson();
     let queueAction: GameAction = new GameAction();
     queueAction.queue(this.person);
     this.sendMessage(queueAction);
+    this.paired=false;
+    this.emptyBoard();
   }
 
   emptyBoard(): void {
@@ -98,6 +107,7 @@ export class GameService{
 
     this.webSocket.onopen = (event) => {
       //console.log('Open: ', event);
+      this.queueUp();
     };
 
     //this runs any time a message is recivced from the server
@@ -119,14 +129,19 @@ export class GameService{
       } else if(action.message == 'go'){
         //called at the start of the game if this is player 1
         this.gameID = action.gameID;
+        this.opponent=action.player;
         this.isTurn = true;
+        this.paired=true;
       } else if(action.message == 'wait'){
         //called at the start of the game if this is player 2
         this.gameID = action.gameID;
+        this.opponent=action.player;
         this.isTurn = false;
+        this.paired=true;
       } else if(action.message == 'win'){
         //called if this player won the game
         this.winner = action.player;
+        this.gametext="WINNER";
         this.isTurn = false;
       } else if(action.message == 'lose'){
         //called if this player lost the game
@@ -136,6 +151,7 @@ export class GameService{
         this.makeMove(playerNumber,row,col);
         this.winner = action.player;
         console.log('winner', this.winner);
+        this.gametext="LOSER";
         this.isTurn = false;
       }
     };

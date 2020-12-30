@@ -1,7 +1,13 @@
-<button type="button" (click)="queue()">test queue</button>
+
+<ng-container *ngIf="!this.gameService.paired; else ingame">
+<button type="button" (click)="dequeue()">Dequeueue</button>
+<div><h3>In queue</h3></div>
+</ng-container>
+<ng-template #ingame>
 <div id="board-container">
     <div id="overlay-container">
         <div id="game-board">
+            <h3>Opponent:{{this.gameService.opponent.username}} &nbsp;&nbsp;&nbsp; Skill Rank:{{this.gameService.opponent.rank}} </h3>
             <table id="board">
                 <tr *ngFor="let row of this.gameService.board | keyvalue">
                     <td *ngFor="let col of row.value | keyvalue" (click)="makeMove(row.key,col.key)">
@@ -20,9 +26,10 @@
         </div>
     
         <div id="winner-area" *ngIf="this.gameService.winner != null" [style]="'min-width:' + boardWidth + 'px;' + 'min-height:' + boardHeight + 'px;'">
-            <p>winner</p>
-            <button type="button">Home</button>
-            <button type="button">Play again</button>
+            <h3>{{this.gameService.gametext}}</h3>
+            <button type="button" (click)="goHome()">Home</button>
+            <button type="button" (click)="playAgain()">Play again</button>
         </div>
     </div>
 </div>
+</ng-template>

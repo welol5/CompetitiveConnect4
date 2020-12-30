@@ -1,14 +1,18 @@
 package com.revature.config;
 
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.context.support.GenericWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
 public class ServletConfig implements WebApplicationInitializer {
+    private String TMP_FOLDER = "/tmp";
+    private int MAX_UPLOAD_SIZE = 5 * 1024 * 1024;
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext appContext = new AnnotationConfigWebApplicationContext();
@@ -26,5 +30,16 @@ public class ServletConfig implements WebApplicationInitializer {
         // here we are basically just saying that all paths go to this servlet
         servlet.addMapping("/");
         //appContext.close();
+
+        //this is for the file upload
+        ServletRegistration.Dynamic appServlet = servletContext.addServlet("mvc", new DispatcherServlet(
+                new GenericWebApplicationContext()));
+
+        appServlet.setLoadOnStartup(1);
+
+        MultipartConfigElement multipartConfigElement = new MultipartConfigElement(TMP_FOLDER,
+                MAX_UPLOAD_SIZE, MAX_UPLOAD_SIZE * 2, MAX_UPLOAD_SIZE / 2);
+
+        appServlet.setMultipartConfig(multipartConfigElement);
     }
 }

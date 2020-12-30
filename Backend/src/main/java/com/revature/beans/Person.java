@@ -24,7 +24,7 @@ public class Person {
         username = "";
         password = "";
         profilePicFilePath = "";
-        rank = 0;
+        rank = 1000;
     }
     public int getId() {
         return id;

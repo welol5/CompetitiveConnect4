@@ -6,8 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200", allowCredentials="true", methods = { RequestMethod.GET,RequestMethod.PUT, RequestMethod.POST, RequestMethod.DELETE })
@@ -48,10 +52,12 @@ public class PersonController {
 
     @PostMapping
     public ResponseEntity<Void> registerUser(HttpSession session, @RequestParam("user") String username,
-                                             @RequestParam("pass") String password) {
+                                             @RequestParam("pass") String password,
+                                             @RequestParam("filepath")String filepath) {
         Person person = new Person();
         person.setUsername(username);
         person.setPassword(password);
+        person.setProfilePicFilePath(filepath);
         personServ.addPerson(person);
         return ResponseEntity.ok().build();
     }
@@ -70,7 +76,7 @@ public class PersonController {
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
-    
+
     @GetMapping(path="/{id}")
     public ResponseEntity<Person> retrievePersonProfile(HttpSession session, @PathVariable("id") Integer id,
     	                             	@RequestBody Person loggedPerson){
@@ -79,14 +85,41 @@ public class PersonController {
     	else if (loggedPerson.getId() == id) return ResponseEntity.ok(loggedPerson);
     	return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
-    
+
     @GetMapping(path="/opponent/{id}")
     public ResponseEntity<Person> retrieveOpponentStats(HttpSession session, @PathVariable("id") Integer id,
     	                             	@RequestBody Person loggedPerson){
     	Person opponent = personServ.getPersonById(id);
     	if (opponent == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     	else return ResponseEntity.ok(opponent);
-    	
+
     }
-    
+//file uploader is functional but not enough time to make everything right in the app
+
+//    @PostMapping(path="/picture")
+//    public ResponseEntity<String> uploadPicture(@RequestParam("file") MultipartFile file, @RequestParam("username") String username) {
+//        if (!file.isEmpty()) {
+//            try {
+//                byte[] bytes = file.getBytes();
+//
+////                File dir = new File(PathToProject.path + File.separator + username);
+//                if (!dir.exists())
+//                    dir.mkdirs();
+//
+//                File serverFile = new File(dir.getAbsolutePath()
+//                        + File.separator + username + "." + file.getContentType().split("/")[1]);
+//                BufferedOutputStream stream = new BufferedOutputStream(
+//                        new FileOutputStream(serverFile));
+//                stream.write(bytes);
+//                stream.close();
+//                System.out.println(serverFile.getAbsolutePath());
+//                return ResponseEntity.ok(serverFile.getAbsolutePath());
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        } else return ResponseEntity.badRequest().build();
+//
+//        return null;
+//    }
 }
