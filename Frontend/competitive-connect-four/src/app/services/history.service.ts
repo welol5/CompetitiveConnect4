@@ -35,7 +35,7 @@ export class HistoryService {
   getGameHistory(loggedPerson: Person): Observable<GameHistory[]> {
     console.log(this.historyUrl+"/users/"+loggedPerson.id);
     // console.log(GameHistory[0]);
-    return this.http.get(this.historyUrl+"/users/"+loggedPerson.id).pipe(
+    return this.http.get(this.historyUrl+"/user/"+loggedPerson.id,{withCredentials: true}).pipe(
       map(resp => resp as GameHistory[])
     );
    
