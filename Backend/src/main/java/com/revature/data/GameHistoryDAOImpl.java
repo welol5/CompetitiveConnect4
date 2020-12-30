@@ -88,7 +88,7 @@ public class GameHistoryDAOImpl implements GameHistoryDAO{
     }
 
     @Override
-    public List<GameHistory> getByPersonId(Integer id) {
+    public List<GameHistory> getByPersonId(Long id) {
         Session s = hu.getSession();
         String query = "";
         query += " from GameHistory WHERE game.player1.id = :id or game.player2.id = :id2 order by date_played desc";
@@ -100,6 +100,7 @@ public class GameHistoryDAOImpl implements GameHistoryDAO{
         s.close();
         return gameHistoryList;
     }
+	
 
 
 }

@@ -33,12 +33,12 @@ export class HistoryService {
     );
   }
   getGameHistory(loggedPerson: Person): Observable<GameHistory[]> {
+    console.log(this.historyUrl+"/users/"+loggedPerson.id);
+    // console.log(GameHistory[0]);
     return this.http.get(this.historyUrl+"/users/"+loggedPerson.id).pipe(
       map(resp => resp as GameHistory[])
     );
-    // let gameHistoryArray = [];
-
-    // return JSON.parse(this.myStorage.getItem('gameHistory'));
+   
   }
   getLeaderboard() {
     let historyArray = [];
