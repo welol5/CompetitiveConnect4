@@ -71,7 +71,7 @@ export class PersonService {
   uploadFile(username: string, file: File): Observable<string> {
     let data: FormData = new FormData();
     data.append('file', file);
-    return this.http.post(this.personUrl + `/picture/${username}`, data,
+    return this.http.post(this.personUrl + `/picture?username=${username}`, data,
     {withCredentials:true}).pipe(
       map(resp => resp as string)
     );

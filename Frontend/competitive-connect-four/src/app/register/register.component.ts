@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Person } from '../models/Person';
 import { PersonService } from '../services/person.service';
 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -25,17 +26,19 @@ export class RegisterComponent implements OnInit {
   register() {
     console.log(this.currentFileUpload);
     if (this.currentFileUpload) {
-
+      
       this.personService.uploadFile(this.user, this.currentFileUpload).subscribe(
-        res => {
-          this.filepath = res;
+        res =>{
           
-          this.personService.registerPerson(this.user, this.pass, this.filepath).subscribe(
-            resp => {
-              this.loggedPerson = resp;
-              this.router.navigate(['home']);
-            }
-          )
+        }
+      );
+      let newFilePath
+      newFilePath = `..3/Pictures/${this.user}/${this.user}.${this.currentFileUpload.type.split("/")[1]}`
+      console.log(this.filepath);
+      this.personService.registerPerson(this.user, this.pass, newFilePath).subscribe(
+        resp => {
+          this.loggedPerson = resp;
+          this.router.navigate(['home']);
         }
       )
     } else {
@@ -49,6 +52,8 @@ export class RegisterComponent implements OnInit {
   }
   attach(image: any) {
     console.log("in the attacher ");
+    
     this.currentFileUpload = image.files[0];
+
   }
 }

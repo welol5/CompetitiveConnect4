@@ -5,16 +5,13 @@ import com.revature.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.time.LocalDateTime;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200", allowCredentials="true", methods = { RequestMethod.GET,RequestMethod.PUT, RequestMethod.POST, RequestMethod.DELETE })
@@ -55,10 +52,12 @@ public class PersonController {
 
     @PostMapping
     public ResponseEntity<Void> registerUser(HttpSession session, @RequestParam("user") String username,
-                                             @RequestParam("pass") String password) {
+                                             @RequestParam("pass") String password,
+                                             @RequestParam("filepath")String filepath) {
         Person person = new Person();
         person.setUsername(username);
         person.setPassword(password);
+        person.setProfilePicFilePath(filepath);
         personServ.addPerson(person);
         return ResponseEntity.ok().build();
     }
@@ -95,34 +94,32 @@ public class PersonController {
     	else return ResponseEntity.ok(opponent);
 
     }
+//file uploader is functional but not enough time to make everything right in the app
 
-    @PostMapping(path="/picture/{username}")
-    public ResponseEntity<String> uploadPicture(@RequestParam("file") MultipartFile file, @PathVariable("username") String username) {
-        if (!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                String rootPath = System.getProperty("catalina.home");
-                File dir = new File(rootPath + File.separator + username);
-                if (!dir.exists())
-                    dir.mkdirs();
-//                System.out.println(file.getContentType().split("\\\\"));
-                System.out.println(file.getContentType().split("/")[0]);
-//                System.out.println(file.getContentType().split("\\\\").toString());
-
-                File serverFile = new File(dir.getAbsolutePath()
-                        + File.separator + username + "." + file.getContentType().split("/")[1]);
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
-                System.out.println(serverFile.getAbsolutePath());
-                return ResponseEntity.ok(serverFile.getAbsolutePath());
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else return ResponseEntity.badRequest().build();
-
-        return null;
-    }
+//    @PostMapping(path="/picture")
+//    public ResponseEntity<String> uploadPicture(@RequestParam("file") MultipartFile file, @RequestParam("username") String username) {
+//        if (!file.isEmpty()) {
+//            try {
+//                byte[] bytes = file.getBytes();
+//
+////                File dir = new File(PathToProject.path + File.separator + username);
+//                if (!dir.exists())
+//                    dir.mkdirs();
+//
+//                File serverFile = new File(dir.getAbsolutePath()
+//                        + File.separator + username + "." + file.getContentType().split("/")[1]);
+//                BufferedOutputStream stream = new BufferedOutputStream(
+//                        new FileOutputStream(serverFile));
+//                stream.write(bytes);
+//                stream.close();
+//                System.out.println(serverFile.getAbsolutePath());
+//                return ResponseEntity.ok(serverFile.getAbsolutePath());
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        } else return ResponseEntity.badRequest().build();
+//
+//        return null;
+//    }
 }
