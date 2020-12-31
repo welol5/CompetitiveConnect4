@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Person } from '../models/Person';
 import { CookieService } from 'ngx-cookie-service';
 import { UrlService } from './url.service';
 import { GameHistory } from '../models/game-history';
@@ -31,11 +32,14 @@ export class HistoryService {
       map(resp => resp as GameHistory[])
     );
   }
-  // getGameHistory(): GameHistory {
-  //   let gameHistoryArray = [];
-
-  //   return JSON.parse(this.myStorage.getItem('gameHistory'));
-  // }
+  getGameHistory(loggedPerson: Person): Observable<GameHistory[]> {
+    console.log(this.historyUrl+"/users/"+loggedPerson.id);
+    // console.log(GameHistory[0]);
+    return this.http.get(this.historyUrl+"/users/"+loggedPerson.id,{withCredentials: true}).pipe(
+      map(resp => resp as GameHistory[])
+    );
+   
+  }
   getLeaderboard() {
     let historyArray = [];
     let leaderboardBuilder= [];

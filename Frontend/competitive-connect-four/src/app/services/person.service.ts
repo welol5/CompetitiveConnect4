@@ -44,7 +44,7 @@ export class PersonService {
 
   updatePerson(updatedPerson: Person): Observable<object> {
     this.loggedPerson = updatedPerson;
-    console.log(this.personUrl + this.loggedPerson.id);
+    console.log(this.personUrl +"/"+ this.loggedPerson.id);
     return this.http.put(this.personUrl + "/"+this.loggedPerson.id, updatedPerson, 
       {headers:this.regHeaders, withCredentials:true}).pipe();
   }
