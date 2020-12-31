@@ -1,7 +1,11 @@
 
 <ng-container *ngIf="!this.gameService.paired; else ingame">
-<button type="button" (click)="dequeue()">Dequeueue</button>
-<div><h3>In queue</h3></div>
+    <div id="qdiv"><div><h3>In queue</h3></div></div>
+    <div id="qdiv">
+    <button type="button" (click)="dequeue()">Dequeueue</button>
+<br>
+<p></p>
+</div>
 </ng-container>
 <ng-template #ingame>
 <div id="board-container">
