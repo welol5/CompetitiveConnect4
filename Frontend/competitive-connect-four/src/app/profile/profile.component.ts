@@ -15,8 +15,9 @@ export class ProfileComponent implements OnInit {
   newPassword: string;
   newPassword2: string;
   editPerson: boolean;
+  viewGamesHistory: boolean;
   gameHistory: GameHistory;
-
+  gameHistoryArray=[];
   constructor(private personService: PersonService, private historyService: HistoryService) { }
 
   ngOnInit(): void {
@@ -27,8 +28,16 @@ export class ProfileComponent implements OnInit {
     // );
     this.loggedPerson = this.personService.getLoggedPerson();
     // console.log(this.loggedPerson);
-    // this.gameHistory = this.historyService.getGameHistory();
     
+    
+  }
+  viewHistory() {
+    this.historyService.getGameHistory(this.loggedPerson).subscribe(
+      res => {
+        this.gameHistoryArray = res;
+        console.log(res);
+      }
+    );
   }
 
   updateUsername() {
