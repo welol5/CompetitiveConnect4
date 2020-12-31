@@ -32,9 +32,12 @@ public class GameHistoryController {
         gameHistoryServ = gh;
     }
 
-    @GetMapping(path = "/user/{id}")
-    public ResponseEntity<List<GameHistory>> retrieveAllGamesById(HttpSession session, @PathVariable("id") Long id) {
+    @GetMapping(path = "/users/{id}")
+    public ResponseEntity<List<GameHistory>> retrieveAllGamesById(HttpSession session, @PathVariable("id") Integer id) {
         System.out.println("test");
+        System.out.println(id);
+        System.out.println(gameHistoryServ.getByPersonId(id));
+        System.out.println("test2");
         return ResponseEntity.ok(gameHistoryServ.getByPersonId(id));
     }
     @GetMapping(path = "/{id}")

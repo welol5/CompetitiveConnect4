@@ -51,7 +51,7 @@ public class GameHistoryDAOImplTest {
         gameHistoryDAO = gameHistoryDAOFactory.getGameHistoryDAO();
 
 
-        assertTrue(gameHistoryDAO.getByPersonId(2L).size() > 0);
+        assertTrue(gameHistoryDAO.getByPersonId(2).size() > 0);
 
     }
     @Test

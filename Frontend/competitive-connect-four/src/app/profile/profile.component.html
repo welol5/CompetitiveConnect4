@@ -41,12 +41,14 @@
            <tr>   
                 <th>Game ID</th>
                 <th>Date Played</th>
-                <th>Winning Player ID</th>
+                <th>Time Played</th>
+                <th>Username</th>
          </tr>
           <tr *ngFor="let game of gameHistoryArray">
                 <td> {{ game.id }}</td>
-                <td>{{ game.timestamp }}</td>
-                <td>{{ game.winner }}</td>
+                <td>{{ game.timestamp.month }} {{ game.timestamp.dayOfMonth }}, {{ game.timestamp.year }}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>{{ game.timestamp.hour}}:{{game.timestamp.minute}}</td>
+                <td>{{ game.winner.username }}</td>
         </tr>
     </table>
 

@@ -35,6 +35,7 @@ export class ProfileComponent implements OnInit {
     this.historyService.getGameHistory(this.loggedPerson).subscribe(
       res => {
         this.gameHistoryArray = res;
+        console.log(res);
       }
     );
   }
