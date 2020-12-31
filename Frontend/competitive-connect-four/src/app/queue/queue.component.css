@@ -1,9 +1,7 @@
-button {
-    align-items: center;
-    width: auto;
-}
 div {
+    
+    /* display: table-cell; */
+    /* vertical-align: middle; */
     display: flex;
     justify-content: center;
 }
-
