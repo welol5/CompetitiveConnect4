@@ -51,14 +51,21 @@ export class GameService{
 
   //uses the websocket to tell the server you want to enter the matchmaking queue
   queueUp(): void {
+    this.personService.refreshPerson();
     this.person = this.personService.getLoggedPerson();
-    console.log('queue');
-    this.person = this.personService.getLoggedPerson();
+    console.log('queue',this.person);
     let queueAction: GameAction = new GameAction();
     queueAction.queue(this.person);
     this.sendMessage(queueAction);
     this.paired=false;
     this.emptyBoard();
+  }
+
+  dequeue(): void{
+    this.person = this.personService.getLoggedPerson();
+    let dequeueAction: GameAction = new GameAction();
+    dequeueAction.dequeue(this.person);
+    this.sendMessage(dequeueAction);
   }
 
   emptyBoard(): void {
@@ -140,7 +147,9 @@ export class GameService{
         this.paired=true;
       } else if(action.message == 'win'){
         //called if this player won the game
+        this.personService.refreshPerson();
         this.winner = action.player;
+        console.log('won against', this.opponent);
         this.gametext="WINNER";
         this.isTurn = false;
       } else if(action.message == 'lose'){
@@ -150,7 +159,8 @@ export class GameService{
         let playerNumber : number = action.player.id;
         this.makeMove(playerNumber,row,col);
         this.winner = action.player;
-        console.log('winner', this.winner);
+        console.log('lost to', this.opponent);
+        this.personService.refreshPerson();
         this.gametext="LOSER";
         this.isTurn = false;
       }

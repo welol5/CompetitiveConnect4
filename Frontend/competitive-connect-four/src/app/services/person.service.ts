@@ -38,8 +38,25 @@ export class PersonService {
     }
   }
 
+  getPersonbyId(id: number): Observable<Person>{
+    return this.http.get(this.personUrl + "/person/"+id,
+    {withCredentials:true}).pipe(
+      map(resp => resp as Person)
+    );
+  }
+
   logoutPerson(){
     this.myStorage.removeItem('person');
+  }
+
+  
+  refreshPerson(){
+    this.getPersonbyId(this.getLoggedPerson().id).subscribe(
+      resp => {
+        this.setLoggedPerson(resp);
+      }
+    );
+    this.getLoggedPerson();
   }
 
   updatePerson(updatedPerson: Person): Observable<object> {

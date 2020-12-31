@@ -18,10 +18,15 @@ export class GameAction {
         this.gameID = gameID;
         this.player = person;
     }
-    //helpful client-side "constructor"
+    //helpful client-side "constructors"
     queue(person: Person): void{
         this.player = person;
         this.message = 'queue';
+    }
+
+    dequeue(person: Person): void{
+        this.player = person;
+        this.message = 'dequeue';
     }
 
 }

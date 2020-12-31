@@ -16,8 +16,9 @@ export class QueueComponent implements OnInit {
   ngOnInit(): void {
     this.error="";
     this.loggedPerson = this.personService.getLoggedPerson();
-    console.log("queue button: ");
+    console.log("loggedplayer: ");
     console.log(this.loggedPerson);
+    console.log(this.personService.getLoggedPerson());
   }
   queue(){
     this.ngOnInit();
@@ -30,5 +31,5 @@ export class QueueComponent implements OnInit {
   printPerson(){
       this.ngOnInit();
   }
-
+ 
 }
