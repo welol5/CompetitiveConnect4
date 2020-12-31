@@ -9,6 +9,7 @@ table {
     box-sizing: border-box;
     border-collapse: collapse;
 }
+
 td {
     align-items: center;
     justify-content: center;

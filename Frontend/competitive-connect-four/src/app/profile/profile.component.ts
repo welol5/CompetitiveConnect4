@@ -4,6 +4,7 @@ import { Person } from '../models/person';
 import { HistoryService } from '../services/history.service';
 import { PersonService } from '../services/person.service';
 
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
