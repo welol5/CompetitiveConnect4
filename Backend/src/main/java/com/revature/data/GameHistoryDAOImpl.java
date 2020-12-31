@@ -93,13 +93,21 @@ public class GameHistoryDAOImpl implements GameHistoryDAO{
         String query = "";
         query += " from GameHistory WHERE game.player1.id = :id or game.player2.id = :id2 order by date_played desc";
         Query<GameHistory> g = s.createQuery(query, GameHistory.class);
+        System.out.println("before");
         g.setParameter("id", id);
         g.setParameter("id2", id);
+        System.out.println("after");
         List<GameHistory> gameHistoryList = new ArrayList<>();
-        gameHistoryList = g.getResultList();
+        try { gameHistoryList = g.getResultList();}
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("after again");
         s.close();
+        System.out.println("after again, again");
         return gameHistoryList;
     }
+	
 
 
 }

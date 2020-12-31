@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,6 +32,14 @@ public class GameHistoryController {
         gameHistoryServ = gh;
     }
 
+    @GetMapping(path = "/users/{id}")
+    public ResponseEntity<List<GameHistory>> retrieveAllGamesById(HttpSession session, @PathVariable("id") Integer id) {
+        System.out.println("test");
+        System.out.println(id);
+        System.out.println(gameHistoryServ.getByPersonId(id));
+        System.out.println("test2");
+        return ResponseEntity.ok(gameHistoryServ.getByPersonId(id));
+    }
     @GetMapping(path = "/{id}")
     public ResponseEntity<GameHistory> retrieveAGame(HttpSession session, @PathVariable("id") Long id) {
         GameHistory gameHistory = gameHistoryServ.getById(id);

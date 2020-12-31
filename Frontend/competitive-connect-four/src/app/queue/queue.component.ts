@@ -2,6 +2,7 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Person } from '../models/Person';
 import { PersonService } from '../services/person.service';
+import { GameService } from '../services/game.service';
 
 @Component({
   selector: 'app-queue',
@@ -11,7 +12,7 @@ import { PersonService } from '../services/person.service';
 export class QueueComponent implements OnInit {
   loggedPerson: Person;
   error:String;
-  constructor(private personService: PersonService, private router: Router) { }
+  constructor(private personService: PersonService, private router: Router, public gameService: GameService) { }
   
   ngOnInit(): void {
     this.error="";
@@ -33,3 +34,4 @@ export class QueueComponent implements OnInit {
   }
  
 }
+

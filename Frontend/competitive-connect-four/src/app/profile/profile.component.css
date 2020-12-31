@@ -1,0 +1,34 @@
+div {
+    
+    /* display: table-cell; */
+    /* vertical-align: middle; */
+    display: flex;
+    justify-content: center;
+}
+section {
+    
+}
+table {
+    width: 100%;
+    background: #d1d1d1;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-collapse: collapse;
+}
+
+td {
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(151, 247, 247);
+    display: flexbox;
+}
+tr {
+    align-items: center;
+    justify-content: center;
+    padding-left: 40 px;
+    
+}

@@ -1,0 +1,39 @@
+button {
+    align-items: center;
+    width: auto;
+}
+span {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+table {
+    width: 100%;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-collapse: collapse;
+}
+
+td {
+    align-items: center;
+    justify-content: center;
+    display: flexbox;
+}
+tr {
+    align-items: center;
+    justify-content: center;
+    padding-left: 40 px;
+    
+}
+th {
+    color: rgb(217, 217, 255);
+}
+div {
+    
+    display: flex;
+    justify-content: center;
+}
