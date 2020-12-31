@@ -11,7 +11,9 @@
 <div id="board-container">
     <div id="overlay-container">
         <div id="game-board">
-            <h3>Opponent:{{this.gameService.opponent.username}} &nbsp;&nbsp;&nbsp; Skill Rank:{{this.gameService.opponent.rank}} </h3>
+            <span><h3>Opponent:{{this.gameService.opponent.username}} &nbsp;&nbsp;&nbsp; Skill Rank:{{this.gameService.opponent.rank}}</h3>
+            <h3 *ngIf="this.gameService.isTurn">&nbsp;&nbsp;&nbsp; YOUR TURN</h3>
+            <h3 *ngIf="!this.gameService.isTurn">&nbsp;&nbsp;&nbsp; WAIT</h3></span>
             <table id="board">
                 <tr *ngFor="let row of this.gameService.board | keyvalue">
                     <td *ngFor="let col of row.value | keyvalue" (click)="makeMove(row.key,col.key)">

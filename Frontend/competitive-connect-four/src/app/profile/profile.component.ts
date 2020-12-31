@@ -22,12 +22,13 @@ export class ProfileComponent implements OnInit {
   constructor(private personService: PersonService, private historyService: HistoryService) { }
 
   ngOnInit(): void {
-    // this.personService.loginPerson(null,null).subscribe(
-    //   resp => {
-    //     this.loggedPerson = resp;
-    //   }
-    // );
     this.loggedPerson = this.personService.getLoggedPerson();
+    this.personService.getPersonbyId(this.loggedPerson.id).subscribe(
+      resp => {
+        this.loggedPerson = resp;
+        this.personService.setLoggedPerson(this.loggedPerson);
+      }
+    );
     // console.log(this.loggedPerson);
     
     

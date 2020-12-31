@@ -22,7 +22,7 @@ export class GameService{
   opponent: Person;
   board: number[][];
   //true if it is this players turn
-  private isTurn: boolean;
+  isTurn: boolean;
 
   private webSocket : WebSocket;
   //socket url, this is slightly different from the http one
@@ -51,14 +51,21 @@ export class GameService{
 
   //uses the websocket to tell the server you want to enter the matchmaking queue
   queueUp(): void {
+    this.personService.refreshPerson();
     this.person = this.personService.getLoggedPerson();
-    console.log('queue');
-    this.person = this.personService.getLoggedPerson();
+    console.log('queue',this.person);
     let queueAction: GameAction = new GameAction();
     queueAction.queue(this.person);
     this.sendMessage(queueAction);
     this.paired=false;
     this.emptyBoard();
+  }
+
+  dequeue(): void{
+    this.person = this.personService.getLoggedPerson();
+    let dequeueAction: GameAction = new GameAction();
+    dequeueAction.dequeue(this.person);
+    this.sendMessage(dequeueAction);
   }
 
   emptyBoard(): void {
@@ -122,35 +129,42 @@ export class GameService{
       } else if(action.message == 'move'){
         //called whenever the other player made a move
         //console.log('move', action);
+        this.gametext="YOUR TURN";
         let row: number = action.row;
         let col: number = action.col;
         let playerNumber : number = action.player.id;
         this.makeMove(playerNumber,row,col);
       } else if(action.message == 'go'){
         //called at the start of the game if this is player 1
+        this.gametext="YOUR TURN";
         this.gameID = action.gameID;
         this.opponent=action.player;
         this.isTurn = true;
         this.paired=true;
       } else if(action.message == 'wait'){
         //called at the start of the game if this is player 2
+        this.gametext="WAIT";
         this.gameID = action.gameID;
         this.opponent=action.player;
         this.isTurn = false;
         this.paired=true;
       } else if(action.message == 'win'){
         //called if this player won the game
+        this.personService.refreshPerson();
         this.winner = action.player;
+       // console.log('won against', this.opponent);
         this.gametext="WINNER";
         this.isTurn = false;
       } else if(action.message == 'lose'){
         //called if this player lost the game
+        this.personService.refreshPerson();
         let row: number = action.row;
         let col: number = action.col;
         let playerNumber : number = action.player.id;
         this.makeMove(playerNumber,row,col);
         this.winner = action.player;
-        console.log('winner', this.winner);
+        //console.log('lost to', this.opponent);
+        this.personService.refreshPerson();
         this.gametext="LOSER";
         this.isTurn = false;
       }
