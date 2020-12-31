@@ -158,10 +158,7 @@ public class GameSocketHandler extends TextWebSocketHandler {
                 otherPlayerSession.sendMessage(moveResponseTextMessage);
             } else {
                     //there is a winner
-                    //let the winner know
-                    response.setMessage("win");
-                    TextMessage moveResponseTextMessage = new TextMessage(objectMapper.writeValueAsString(response));
-                    session.sendMessage(moveResponseTextMessage);
+
                     //new game history for DB
                     GameState currentGame = game.getGameState();
                     long gameId = gameStateService.createNewGame(currentGame);
@@ -174,7 +171,10 @@ public class GameSocketHandler extends TextWebSocketHandler {
                         loser = currentGame.getPlayer2();
                     } else loser = currentGame.getPlayer1();
                     personService.calculatePoints(winner, loser);
-
+                    //let the winner know
+                    response.setMessage("win");
+                    TextMessage moveResponseTextMessage = new TextMessage(objectMapper.writeValueAsString(response));
+                    session.sendMessage(moveResponseTextMessage);
                 //let the other player know a move has been made and they lost
                 response.setMessage("lose");
                 moveResponseTextMessage = new TextMessage(objectMapper.writeValueAsString(response));

@@ -54,9 +54,9 @@ export class PersonService {
     this.getPersonbyId(this.getLoggedPerson().id).subscribe(
       resp => {
         this.setLoggedPerson(resp);
+        //console.log("REFRESHPERSON",resp);
       }
     );
-    this.getLoggedPerson();
   }
 
   updatePerson(updatedPerson: Person): Observable<object> {

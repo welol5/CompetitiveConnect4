@@ -47,12 +47,12 @@ export class GameComponent implements OnInit,OnDestroy,AfterViewChecked {
   }
 
   playAgain(){
-    console.log('play again', this.personService.getLoggedPerson());
+  //console.log('play again', this.personService.getLoggedPerson());
     
    this.gameService.paired=false;
    this.gameService.winner = null;
-   this.personService.refreshPerson();
-   console.log(this.personService.getLoggedPerson());
+  // this.personService.refreshPerson();
+   //console.log(this.personService.getLoggedPerson());
    this.queueUp();
   }
 
@@ -61,7 +61,7 @@ export class GameComponent implements OnInit,OnDestroy,AfterViewChecked {
   }
 
   goHome(){
-    console.log('home',this.personService.getLoggedPerson());
+   // console.log('home',this.personService.getLoggedPerson());
     this.gameService.winner = null;
    // this.personService.refreshPerson();
     this.router.navigate(['home']);

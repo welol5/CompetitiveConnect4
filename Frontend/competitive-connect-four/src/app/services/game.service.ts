@@ -22,7 +22,7 @@ export class GameService{
   opponent: Person;
   board: number[][];
   //true if it is this players turn
-  private isTurn: boolean;
+  isTurn: boolean;
 
   private webSocket : WebSocket;
   //socket url, this is slightly different from the http one
@@ -129,18 +129,21 @@ export class GameService{
       } else if(action.message == 'move'){
         //called whenever the other player made a move
         //console.log('move', action);
+        this.gametext="YOUR TURN";
         let row: number = action.row;
         let col: number = action.col;
         let playerNumber : number = action.player.id;
         this.makeMove(playerNumber,row,col);
       } else if(action.message == 'go'){
         //called at the start of the game if this is player 1
+        this.gametext="YOUR TURN";
         this.gameID = action.gameID;
         this.opponent=action.player;
         this.isTurn = true;
         this.paired=true;
       } else if(action.message == 'wait'){
         //called at the start of the game if this is player 2
+        this.gametext="WAIT";
         this.gameID = action.gameID;
         this.opponent=action.player;
         this.isTurn = false;
@@ -149,17 +152,18 @@ export class GameService{
         //called if this player won the game
         this.personService.refreshPerson();
         this.winner = action.player;
-        console.log('won against', this.opponent);
+       // console.log('won against', this.opponent);
         this.gametext="WINNER";
         this.isTurn = false;
       } else if(action.message == 'lose'){
         //called if this player lost the game
+        this.personService.refreshPerson();
         let row: number = action.row;
         let col: number = action.col;
         let playerNumber : number = action.player.id;
         this.makeMove(playerNumber,row,col);
         this.winner = action.player;
-        console.log('lost to', this.opponent);
+        //console.log('lost to', this.opponent);
         this.personService.refreshPerson();
         this.gametext="LOSER";
         this.isTurn = false;
