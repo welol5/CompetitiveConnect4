@@ -9,9 +9,9 @@
             <th>rank</th>
         </tr>
         <tr *ngFor="let winnerObj of leaderboard">
-            <td> {{winnerObj.wins}}</td>
-            <td>{{winnerObj.winner.username}}</td>
-            <td>{{winnerObj.winner.rank}}</td>
+            <td style="text-align:center"class="first"> {{winnerObj.wins}}</td>
+            <td style="text-align:center"class="second"><div>{{winnerObj.winner.username}}</div></td>
+            <td style="text-align:center"class="third"><div>{{winnerObj.winner.rank}}</div></td>
         </tr>
     </Table>
 </div>>

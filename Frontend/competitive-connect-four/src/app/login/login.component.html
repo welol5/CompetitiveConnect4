@@ -1,4 +1,4 @@
-<div>
+
     <ng-container *ngIf="!loggedPerson; else loggedIn">
         <label for="user">Username: </label>
         <input id="user" name="user" type="text" [(ngModel)]="user" />
@@ -6,12 +6,33 @@
         <input id="pass" name="pass" type="password" [(ngModel)]="pass" />
         <button type="button" id="loginBtn" (click)="logIn()">Log In</button>
         <a href="register">register</a>
+        
     </ng-container>
     <ng-template #loggedIn>
         <span>
-          <a href="profile">{{ loggedPerson.username }}&nbsp;</a>
-          <button type="button" id="homeBtn" (click)="goHome()">Home</button>
-            <button type="button" id="loginBtn" (click)="logOut()">Log Out</button>
+            <table>
+                <tr>
+                    <th>spacingNddoooooo</th>
+                    <th>spacingd</th>
+                    <th>spacifNuiin l l l l l l</th>
+                </tr>
+            <tr>
+                <td>
+                <div>
+                    <a href="profile">{{ loggedPerson.username }}&nbsp;</a>
+                </div>
+                </td>
+                <td>
+                <div>
+                    <button type="button" id="homeBtn" (click)="goHome()">Home</button>
+                </div>
+                </td>
+                <td>
+                <div>
+                    <button type="button" id="loginBtn" (click)="logOut()">Log Out</button>
+                </div>
+                </td>
+            </tr>
+            </table>
         </span>
     </ng-template>
-</div>

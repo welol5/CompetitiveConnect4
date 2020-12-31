@@ -57,3 +57,11 @@
     min-width: 700px;
     min-height: 700px;
 }
+button {
+    align-items: center;
+    width: auto;
+}
+#qdiv {
+    display: flex;
+    justify-content: center;
+}
