@@ -39,3 +39,7 @@ William Elliman
 AJ Johnson
 Lydia Bierer
 Spencer Campbell
+
+## License
+
+This project uses the following license: MIT
