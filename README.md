@@ -10,6 +10,15 @@ Competitive Connect 4, or CC4, is a website where players can login and play Con
 * Spring MVC
 * Angular
 
+## Features
+
+* Register/Log in/Log out
+* Play a game of connect four
+* See daily leaderboard
+* Review game history
+* update account information
+* Requeue after a game
+
 To-do list:
 * Bootstrap integration
 * More robust socket implementation
