@@ -1,5 +1,1 @@
-Competitive Connect 4 project
-
-Spencer
-Made a change
-Lydia
+Competitive Connect 4, or CC4, is a website where players can login and play Connect 4 with others. Players enter a queue where they will be matched with other players, then they are able to play live with the user with whom they were matched. Players can see their profile to check their rank and edit their account, as well as a leaderboard on the home page.
