@@ -29,7 +29,7 @@ export class GameService{
   private url : string;
 
   constructor(private http: HttpClient, private urlService: UrlService, private personService: PersonService) {
-    this.url = 'ws://localhost:8080/Backend_war_exploded/gameaction';
+    this.url = urlService.getWSUrl() + 'gameaction';
     this.emptyBoard();
     this.paired=false;
     this.person = new Person();

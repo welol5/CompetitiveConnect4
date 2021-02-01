@@ -23,7 +23,7 @@ export class HistoryService {
   'Content-Type':'application/json'});
 
   constructor(private http: HttpClient,private urlService:UrlService, private cookieService: CookieService) { 
-    this.historyUrl = this.urlService.getUrl() + 'Backend_war_exploded/history';
+    this.historyUrl = this.urlService.getUrl() + 'history';
   }
 
   getHistoryToday(): Observable<GameHistory[]> {

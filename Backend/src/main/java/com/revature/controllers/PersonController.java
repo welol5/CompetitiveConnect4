@@ -100,32 +100,4 @@ public class PersonController {
     	else return ResponseEntity.ok(opponent);
 
     }
-//file uploader is functional but not enough time to make everything right in the app
-
-//    @PostMapping(path="/picture")
-//    public ResponseEntity<String> uploadPicture(@RequestParam("file") MultipartFile file, @RequestParam("username") String username) {
-//        if (!file.isEmpty()) {
-//            try {
-//                byte[] bytes = file.getBytes();
-//
-////                File dir = new File(PathToProject.path + File.separator + username);
-//                if (!dir.exists())
-//                    dir.mkdirs();
-//
-//                File serverFile = new File(dir.getAbsolutePath()
-//                        + File.separator + username + "." + file.getContentType().split("/")[1]);
-//                BufferedOutputStream stream = new BufferedOutputStream(
-//                        new FileOutputStream(serverFile));
-//                stream.write(bytes);
-//                stream.close();
-//                System.out.println(serverFile.getAbsolutePath());
-//                return ResponseEntity.ok(serverFile.getAbsolutePath());
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        } else return ResponseEntity.badRequest().build();
-//
-//        return null;
-//    }
 }

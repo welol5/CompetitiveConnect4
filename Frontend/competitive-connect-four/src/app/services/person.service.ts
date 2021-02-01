@@ -20,7 +20,7 @@ export class PersonService {
     private headers = new HttpHeaders().set('access-control-allow-origin',"http://localhost:8080/");
 
   constructor(private http: HttpClient,private urlService:UrlService, private cookieService: CookieService) {
-    this.personUrl = this.urlService.getUrl() + 'Backend_war_exploded/users';
+    this.personUrl = this.urlService.getUrl() + 'users';
    }
 
    loginPerson(username: string, password: string): Observable<Person> {
@@ -65,12 +65,16 @@ export class PersonService {
     return this.http.put(this.personUrl + "/"+this.loggedPerson.id, updatedPerson, 
       {headers:this.regHeaders, withCredentials:true}).pipe();
   }
+  
   setLoggedPerson(person: Person){
+    this.loggedPerson = person;
     this.myStorage.setItem('person', JSON.stringify(person));
   }
   getLoggedPerson(): Person {
-    return JSON.parse(this.myStorage.getItem('person'));
+    //return JSON.parse(this.myStorage.getItem('person'));
+    return this.loggedPerson;
   }
+
   registerPerson(username: string, password: string, filepath: string): Observable<Person> {
     if (username && password) {
       const queryParams = `?user=${username}&pass=${password}&filepath=${filepath}`;

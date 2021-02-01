@@ -28,8 +28,7 @@ export class LoginComponent implements OnInit {
   logIn() {
     if(this.personService.getLoggedPerson()){
       this.loggedPerson=this.personService.getLoggedPerson();
-    }else{
-    console.log(this.user + ' ' + this.pass);
+    }else if(this.user != '' && this.pass != ''){
     this.personService.loginPerson(this.user, this.pass).subscribe(
       resp => {
         this.loggedPerson = resp;
