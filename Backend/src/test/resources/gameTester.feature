@@ -25,8 +25,15 @@ Feature: Test Queueing up and playing the game
 		Then they will see the queue screen
 		And they should be able to leave the queue
 		
-	Scenario: Test playing the game
+	Scenario: Test being put into a game
 		Given two players are logged in
 		When they both press the queue button
 		Then they will be put into a game
 		
+		Scenario: Test playing a game
+		Given two players are logged in
+		When they both press the queue button
+		And they will be put into a game
+		And they will make moves
+		And someone will have won the game
+		Then they will be able to either requeue or go back to the home page

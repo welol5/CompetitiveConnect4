@@ -34,6 +34,19 @@ public class GameTester {
 	
 	@Given("two players are logged in")
 	public void two_players_are_logged_in() {
+		
+		try {
+			driver.close();
+		} catch (Exception e) {
+			
+		}
+		
+		try {
+			driver2.close();
+		} catch (Exception e) {
+			
+		}
+		
 		driver = new FirefoxDriver();
 		driver2 = new FirefoxDriver();
 		driver.get("http://localhost:4200");
@@ -49,9 +62,9 @@ public class GameTester {
 	    	loginAndRegister2.logout();
 	    }
 	    
-	    loginAndRegister.login("test", "password");
+	    loginAndRegister.login("test1", "password");
 	    loginAndRegister2.login("test2", "password");
-	    assertTrue(loginAndRegister.checkLoggedIn("test"));
+	    assertTrue(loginAndRegister.checkLoggedIn("test1"));
 	    assertTrue(loginAndRegister2.checkLoggedIn("test2"));
 	}
 	
@@ -63,8 +76,8 @@ public class GameTester {
 	    if(loginAndRegister.checkLoggedIn()) {
 	    	loginAndRegister.logout();
 	    }
-	    loginAndRegister.login("test", "password");
-	    assertTrue(loginAndRegister.checkLoggedIn("test"));
+	    loginAndRegister.login("test1", "password");
+	    assertTrue(loginAndRegister.checkLoggedIn("test1"));
 	}
 	
 	@When("they press the queue button")
@@ -111,5 +124,29 @@ public class GameTester {
 	public void they_will_be_put_into_a_game() {
 	    assertTrue(queueAndGame.isInGame());
 	    assertTrue(queueAndGame2.isInGame());
+	}
+	
+	@When("they will make moves")
+	public void they_will_make_moves() {
+	    for(int i = 0; i < 4; i++) {
+	    	queueAndGame2.makeMove(i, 0);
+	    	queueAndGame.checkMoveMade(i, 0);
+	    	if(i < 3) {
+	    		queueAndGame.makeMove(i, 1);
+	    		queueAndGame2.checkMoveMade(i, 1);
+	    	}
+	    }
+	}
+
+	@When("someone will have won the game")
+	public void someone_will_have_won_the_game() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+
+	@Then("they will be able to either requeue or go back to the home page")
+	public void they_will_be_able_to_either_requeue_or_go_back_to_the_home_page() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
 	}
 }
