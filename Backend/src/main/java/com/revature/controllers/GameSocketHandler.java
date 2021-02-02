@@ -68,6 +68,7 @@ public class GameSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         super.afterConnectionClosed(session,status);
+        removePlayerFromQueue(session);
     }
 
     public void addPlayerToQueue(WebSocketSession session, Person person) throws Exception{
@@ -125,6 +126,19 @@ public class GameSocketHandler extends TextWebSocketHandler {
 
     public void dequeue(Person player){
         queue.removeIf(qp -> qp.getPlayer().getId() == player.getId());
+    }
+    
+    public void removePlayerFromQueue(WebSocketSession session) {
+    	QueuePosition playerToRemove = null;
+    	for(QueuePosition qp : queue) {
+    		if(qp.getPlayerSession().equals(session)) {
+    			playerToRemove = qp;
+    			break;
+    		}
+    	}
+    	if(playerToRemove != null) {
+    		queue.remove(playerToRemove);
+    	}
     }
 
     public void makeMove(WebSocketSession session, Action action) throws GameRuleException, IOException {
