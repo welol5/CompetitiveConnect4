@@ -73,19 +73,32 @@ public class QueueAndGame {
 		WebElement row = gameTable.findElements(By.tagName("tr")).get(rowNum);
 		WebElement position = row.findElements(By.tagName("td")).get(colNum);
 		position.click();
+		System.out.println("/////////////////////////////////////////////////////////");
+		System.out.println(position);
+		System.out.println(position.getAttribute("class"));
 		
 		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
 				.withTimeout(10, TimeUnit.SECONDS)
 				.pollingEvery(100, TimeUnit.MILLISECONDS)
-				//.ignoring(NoSuchElementException.class);
+				.ignoring(NoSuchElementException.class);
 		
-		row = gameTable.findElements(By.tagName("tr")).get(rowNum);
-		position = row.findElements(By.tagName("td")).get(colNum);
 		try {
-			wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(position.findElement(By.cssSelector(".player0")))));
+			wait.until(ExpectedConditions.attributeContains(position.findElement(By.tagName("div")), "class", "player1"));
 		} catch (TimeoutException e) {
 			e.printStackTrace();
+			System.out.println(position.findElement(By.tagName("div")).getCssValue("background-color"));
+			
+//			WebElement gt = driver.findElement(By.id("board"));
+//			row = gt.findElements(By.tagName("tr")).get(rowNum);
+//			position = row.findElements(By.tagName("td")).get(colNum);
+//			System.out.println(position.findElement(By.tagName("div")).getAttribute("class"));
 		}
+//		System.out.println(position.findElement(By.tagName("div")).getAttribute("class"));
+//		
+//		WebElement gt = driver.findElement(By.id("board"));
+//		row = gt.findElements(By.tagName("tr")).get(rowNum);
+//		position = row.findElements(By.tagName("td")).get(colNum);
+//		System.out.println(position.findElement(By.tagName("div")).getAttribute("class"));
 	}
 	
 	public boolean checkMoveMade(int rowNum, int colNum) {
