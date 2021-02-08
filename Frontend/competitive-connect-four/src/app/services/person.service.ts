@@ -46,7 +46,7 @@ export class PersonService {
   }
 
   logoutPerson(){
-    this.myStorage.removeItem('person');
+    this.loggedPerson = null;
   }
 
   
@@ -68,7 +68,6 @@ export class PersonService {
   
   setLoggedPerson(person: Person){
     this.loggedPerson = person;
-    this.myStorage.setItem('person', JSON.stringify(person));
   }
   getLoggedPerson(): Person {
     //return JSON.parse(this.myStorage.getItem('person'));
