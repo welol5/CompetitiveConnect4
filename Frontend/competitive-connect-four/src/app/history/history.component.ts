@@ -78,7 +78,9 @@ export class HistoryComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked(): void {
     let gameElement : HTMLElement = document.getElementById('game-board') as HTMLElement;
-    this.boardWidth = gameElement.offsetWidth;
-    this.boardHeight = gameElement.offsetHeight;
+    if(gameElement){
+      this.boardWidth = gameElement.offsetWidth;
+      this.boardHeight = gameElement.offsetHeight;
+    }
   }
 }

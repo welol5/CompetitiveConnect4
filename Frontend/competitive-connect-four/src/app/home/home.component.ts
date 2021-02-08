@@ -45,7 +45,6 @@ export class HomeComponent implements OnInit {
           // console.log(winnerObj);
           this.leaderboard.push(leaderboardBuilder[winnerStr]);
         }
-        console.log(this.leaderboard);
         this.leaderboard.sort((a, b) => b.wins - a.wins);
         // console.log (this.leaderboard[0].wins);
 
