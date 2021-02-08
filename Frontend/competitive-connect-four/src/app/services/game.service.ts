@@ -42,7 +42,7 @@ export class GameService{
   
 
   //uses the websocket to send a game move
-  sendMove(gameID: number, row: number, col: number){
+  sendMove(gameID: number, row: number, col: number) : void{
     let gameAction: GameAction = new GameAction();
     gameAction.makeMove(this.person,gameID,row,col);
     this.sendMessage(gameAction);
@@ -50,7 +50,7 @@ export class GameService{
   }
 
   //uses the websocket to tell the server you want to enter the matchmaking queue
-  queueUp(): void {
+  queueUp(): void{
     this.personService.refreshPerson();
     this.person = this.personService.getLoggedPerson();
     console.log('queue',this.person);
@@ -78,14 +78,13 @@ export class GameService{
   }
 
   //called when either player makes a move to update the board
-  makeMove(player: number, row: number, col: number): void {
+  makeMove(player: number, row: number, col: number, isLive = true): void{
     if(player == -1){
       player = this.person.id;
-      if(!this.isTurn){
+      if(!this.isTurn && isLive){
         return;
       }
     }
-    //console.log("Making move :" + "(" + row + "," + col + ")");
     for(let r = this.board.length-1; r >= 0 ; r--){
       if(this.board[r][col] == 1 || this.board[r][col] == 2){
         continue;
@@ -93,10 +92,12 @@ export class GameService{
 
         //if(move is legal)
         //do nothing if the move was not legal
-        if(player == this.person.id){
+        if(player === this.person.id){
           //if the player is the local one, send the move to the server
           this.board[r][col] = 1;
-          this.sendMove(this.gameID,row,col);
+          if(isLive){
+            this.sendMove(this.gameID,row,col);
+          }
           this.isTurn = false;
         } else {
           //the other player made a move, just reflect it on the board
@@ -109,7 +110,7 @@ export class GameService{
   }
 
   //socket stuff////////////////////////////////////////////////////////////////
-  openConnection(){
+  openConnection() : void{
     this.webSocket = new WebSocket(this.url);
 
     this.webSocket.onopen = (event) => {
@@ -175,12 +176,16 @@ export class GameService{
     };
   }
 
-  private sendMessage(gameAction: GameAction){
+  private sendMessage(gameAction: GameAction) : void{
     //console.log(gameAction);
     this.webSocket.send(JSON.stringify(gameAction));
   }
 
-  closeConnection(){
+  closeConnection() : void{
     this.webSocket.close();
+  }
+
+  setLoggedPerson() : void{
+    this.person = this.personService.getLoggedPerson();
   }
 }

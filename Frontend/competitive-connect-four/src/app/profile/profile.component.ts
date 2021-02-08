@@ -29,15 +29,11 @@ export class ProfileComponent implements OnInit {
         this.personService.setLoggedPerson(this.loggedPerson);
       }
     );
-    // console.log(this.loggedPerson);
-    
-    
   }
   viewHistory() {
     this.historyService.getGameHistory(this.loggedPerson).subscribe(
       res => {
         this.gameHistoryArray = res;
-        console.log(res);
       }
     );
   }

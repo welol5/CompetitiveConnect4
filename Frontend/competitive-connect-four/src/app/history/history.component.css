@@ -1,0 +1,50 @@
+#board-container {
+    display: flex;
+    position: initial;
+    justify-content: center;
+    background-color: lightgray;
+    min-width: 700px;
+    min-height: 700px;
+}
+
+.place {
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 100%;
+    min-width: 100px;
+    min-height: 100px;
+}
+
+.player1 {
+    background-color: red;
+    color: red;
+}
+
+.player2 {
+    background-color: blue;
+    color: blue;
+}
+
+.player0 {
+    background-color: white;
+    color: white;
+}
+
+#board {
+    background-color: black;
+    min-width: 700px;
+    min-height: 600px;
+}
+
+#game-board {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#overlay-container {
+    position: relative;
+    min-width: 700px;
+    min-height: 700px;
+}

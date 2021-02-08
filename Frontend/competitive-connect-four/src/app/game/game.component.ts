@@ -17,12 +17,11 @@ export class GameComponent implements OnInit,OnDestroy,AfterViewChecked {
   boardHeight: number;
   constructor(public gameService: GameService,private personService: PersonService, private router: Router) {
   }
+
   ngAfterViewChecked(): void {
     let gameElement : HTMLElement = document.getElementById('game-board') as HTMLElement;
     this.boardWidth = gameElement.offsetWidth;
     this.boardHeight = gameElement.offsetHeight;
-    //console.log('width', this.boardWidth);
-    //console.log('height', this.boardHeight);
   }
 
   ngOnDestroy(): void {
@@ -34,11 +33,9 @@ export class GameComponent implements OnInit,OnDestroy,AfterViewChecked {
   }
 
   makeMove(row: number, col: number): void {
-    //console.log("click move : " + "(" + row + "," + col + ")");
     this.gameService.makeMove(-1,row,col);
   }
   dequeue(){
-    //Dequeue code
     this.gameService.dequeue();
     this.goHome();
   }
@@ -47,12 +44,8 @@ export class GameComponent implements OnInit,OnDestroy,AfterViewChecked {
   }
 
   playAgain(){
-  //console.log('play again', this.personService.getLoggedPerson());
-    
    this.gameService.paired=false;
    this.gameService.winner = null;
-  // this.personService.refreshPerson();
-   //console.log(this.personService.getLoggedPerson());
    this.queueUp();
   }
 
@@ -61,9 +54,7 @@ export class GameComponent implements OnInit,OnDestroy,AfterViewChecked {
   }
 
   goHome(){
-   // console.log('home',this.personService.getLoggedPerson());
     this.gameService.winner = null;
-   // this.personService.refreshPerson();
     this.router.navigate(['home']);
   }
 

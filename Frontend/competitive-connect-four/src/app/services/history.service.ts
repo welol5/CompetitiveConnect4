@@ -12,10 +12,7 @@ import { GameHistory } from '../models/game-history';
 })
 export class HistoryService {
   private historyUrl: string;
-  private myStorage = window.localStorage;
-  // private historyArray: GameHistory[];
-  // private 
-  // private ;
+  private historyArray: GameHistory[];//used ofr caching
 
   private formHeaders = new HttpHeaders({'Cookie':this.cookieService.get('JSESSIONID'),
   'Content-Type': 'application/x-www-form-urlencoded'});
@@ -33,13 +30,18 @@ export class HistoryService {
     );
   }
   getGameHistory(loggedPerson: Person): Observable<GameHistory[]> {
-    console.log(this.historyUrl+"/users/"+loggedPerson.id);
-    // console.log(GameHistory[0]);
-    return this.http.get(this.historyUrl+"/users/"+loggedPerson.id,{withCredentials: true}).pipe(
+    let historyObs : Observable<GameHistory[]>  =  this.http.get(this.historyUrl+"/users/"+loggedPerson.id,{withCredentials: true}).pipe(
       map(resp => resp as GameHistory[])
     );
-   
+    
+    historyObs.subscribe(resp => this.historyArray = resp);
+    return historyObs;
   }
+
+  getCachedGameHistory(): GameHistory[]{
+    return this.historyArray;
+  }
+
   getLeaderboard() {
     let historyArray = [];
     let leaderboardBuilder= [];

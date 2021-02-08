@@ -1,0 +1,23 @@
+<div id="board-container">
+    <div id="overlay-container">
+        <div *ngIf="this.opponent" id="game-board">
+            <span><h3>Opponent:{{this.opponent.username}} &nbsp;&nbsp;&nbsp; Skill Rank:{{this.opponent.rank}}</h3>
+            <h3>&nbsp;&nbsp;&nbsp; Old Game</h3></span>
+            <table id="board">
+                <tr *ngFor="let row of this.board | keyvalue">
+                    <td *ngFor="let col of row.value | keyvalue">
+                        <div *ngIf="col.value == 0" class="place player0">
+                            <!-- {{col.value}} --> 
+                        </div>
+                        <div *ngIf="col.value == 1" class="place player1">
+                            <!-- {{col.value}} --> 
+                        </div>
+                        <div *ngIf="col.value == 2" class="place player2">
+                            <!-- {{col.value}} --> 
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
