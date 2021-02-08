@@ -3,7 +3,7 @@
         <label for="user">Username: </label>
         <input id="user" name="user" type="text" [(ngModel)]="user" />
         <label for="pass"> Password: </label>
-        <input id="pass" name="pass" type="password" [(ngModel)]="pass" />
+        <input id="pass" name="pass" type="password" (keyup.enter)="logIn()" [(ngModel)]="pass" />
         <button type="button" id="loginBtn" (click)="logIn()">Log In</button>
         <a routerLink="register">register</a>
         

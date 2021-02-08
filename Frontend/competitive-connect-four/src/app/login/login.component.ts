@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     this.logIn();
   }
   ngOnChanges() {
-    console.log(this.user + ' ' + this.pass);
+    
   }
   logIn() {
     if(this.personService.getLoggedPerson()){
