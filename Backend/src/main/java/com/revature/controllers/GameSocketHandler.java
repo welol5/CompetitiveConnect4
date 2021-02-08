@@ -21,7 +21,7 @@ import java.util.*;
 public class GameSocketHandler extends TextWebSocketHandler {
     private @Autowired GameHistoryService gameHistoryServ;
     private @Autowired PersonService personService;
-    private final Map<Long, ActiveGame> activeGames = new HashMap<>();
+    private final Map<Long, ActiveGame> activeGames = new HashMap<>(1000);
     private final List<QueuePosition> queue = new ArrayList<>();
     private final QueuePosition.RankComparitor comparitor = new QueuePosition.RankComparitor();
     private ObjectMapper objectMapper = new ObjectMapper();
@@ -90,7 +90,7 @@ public class GameSocketHandler extends TextWebSocketHandler {
                 newGame.setMoves("");
                 newGame.setPlayer1(person);
                 newGame.setPlayer2(qp.getPlayer());
-                //gameStateService.createNewGame(newGame);
+                gameStateService.createNewGame(newGame);
                 //new game created
 
                 ActiveGame newActiveGame = new ActiveGame(session, qp.getPlayerSession(), newGame);
