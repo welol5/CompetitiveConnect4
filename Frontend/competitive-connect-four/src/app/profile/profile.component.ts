@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { GameHistory } from '../models/game-history';
 import { Person } from '../models/person';
 import { HistoryService } from '../services/history.service';
@@ -19,10 +20,15 @@ export class ProfileComponent implements OnInit {
   viewGamesHistory: boolean;
   gameHistory: GameHistory;
   gameHistoryArray=[];
-  constructor(private personService: PersonService, private historyService: HistoryService) { }
+  constructor(private router: Router, private personService: PersonService, private historyService: HistoryService) { }
 
   ngOnInit(): void {
     this.loggedPerson = this.personService.getLoggedPerson();
+
+    if(!this.loggedPerson){
+      this.router.navigate(["home"]);
+    }
+
     this.personService.getPersonbyId(this.loggedPerson.id).subscribe(
       resp => {
         this.loggedPerson = resp;
