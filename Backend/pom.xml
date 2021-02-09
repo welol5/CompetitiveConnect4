@@ -102,12 +102,12 @@
 <!--			<version>5.7.0-M1</version>-->
 <!--			<scope>test</scope>-->
 <!--		</dependency>-->
-<!--		&lt;!&ndash; Postgresql &ndash;&gt;-->
-<!--		<dependency>-->
-<!--			<groupId>org.postgresql</groupId>-->
-<!--			<artifactId>postgresql</artifactId>-->
-<!--			<version>42.2.14</version>-->
-<!--		</dependency>-->
+		<!-- Postgresql -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.14</version>
+		</dependency>
 <!--		&lt;!&ndash; Mockito &ndash;&gt;-->
 <!--		<dependency>-->
 <!--			<groupId>org.mockito</groupId>-->
