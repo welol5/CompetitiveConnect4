@@ -1,40 +1,33 @@
 package com.revature.services;
 
 import com.revature.beans.GameState;
-import com.revature.beans.Person;
 import com.revature.data.GameStateDAO;
-import com.revature.data.GameStateDAOFactory;
-import com.revature.data.PersonDAO;
-import com.revature.data.PersonDAOFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GameStateServiceImpl implements GameStateService {
 	private GameStateDAO gameStateDao;
 
+	@Autowired
     public GameStateServiceImpl(GameStateDAO gs) {
-        gameStateDao =gs;
+        gameStateDao = gs;
     }
-
-	public GameStateServiceImpl() {
-		GameStateDAOFactory gameStateDaoFactory = new GameStateDAOFactory();
-		gameStateDao = gameStateDaoFactory.getGameStateDAO();
-	}
 
 	@Override
 	public Long createNewGame(GameState gs) {
-		return gameStateDao.add(gs).getId();
+		return gameStateDao.save(gs).getId();
 	}
 
 	@Override
 	public GameState getGameStateById(Long id) {
-		return gameStateDao.getByLongId(id);
+		return gameStateDao.getOne(id);
 	}
 
 
 	@Override
 	public void makeMove(GameState gs) {
-		gameStateDao.update(gs);
+		gameStateDao.save(gs);
 	}
 
 

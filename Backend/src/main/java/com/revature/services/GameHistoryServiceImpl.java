@@ -4,8 +4,6 @@ import com.revature.beans.GameHistory;
 import com.revature.beans.GameState;
 import com.revature.beans.Person;
 import com.revature.data.GameHistoryDAO;
-import com.revature.data.GameHistoryDAOFactory;
-import com.revature.data.GameStateDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +11,7 @@ import java.util.List;
 @Service
 public class GameHistoryServiceImpl implements GameHistoryService{
     private GameHistoryDAO gameHistoryDAO;
+
     @Autowired
     public GameHistoryServiceImpl(GameHistoryDAO g) {
         gameHistoryDAO = g;
@@ -22,14 +21,14 @@ public class GameHistoryServiceImpl implements GameHistoryService{
         GameHistory g = new GameHistory();
         g.setGame(game);
         g.setWinner(winner);
-        return gameHistoryDAO.add(g);
+        return gameHistoryDAO.save(g);
     }
 
 
 
     @Override
     public GameHistory getById(Long id) {
-        return gameHistoryDAO.getByLongId(id);
+        return gameHistoryDAO.getOne(id);
     }
 
     @Override

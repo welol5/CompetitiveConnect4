@@ -1,9 +1,12 @@
 package com.revature.data;
 
 import com.revature.beans.Person;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface PersonDAO extends GenericDAO<Person> {
-    public Person add(Person p);
-    public Person getByUsername(String username);
-    public Person getById(Integer id);
+@Repository
+public interface PersonDAO extends JpaRepository<Person, Integer> {
+    //public Person add(Person p);
+    public Person findByUsername(String username);
+    //public Person getById(Integer id);
 }

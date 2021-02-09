@@ -2,7 +2,6 @@ package com.revature.services;
 
 import com.revature.beans.Person;
 import com.revature.data.PersonDAO;
-import com.revature.data.PersonDAOFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,29 +18,29 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public Integer addPerson(Person p) {
-		return personDao.add(p).getId();
+		return personDao.save(p).getId();
 	}
 
 	@Override
 	public Person getPersonById(Integer id) {
-		return personDao.getById(id);
+		return personDao.getOne(id);
 	}
 
 	@Override
 	public Person getPersonByUsername(String username) {
-		return personDao.getByUsername(username);
+		return personDao.findByUsername(username);
 	}
 	
 	@Override
 	public void updateUsername(Person p, String newUsername) {
 		p.setUsername(newUsername);
-		personDao.update(p);
+		personDao.save(p);
 		
 	}
 // add a comment
 	@Override
 	public void updatePerson(Person p) {
-		personDao.update(p);
+		personDao.save(p);
 	}
 
 	@Override
@@ -58,8 +57,8 @@ public class PersonServiceImpl implements PersonService {
 			winner.setRank(winner.getRank() + 25);
 			loser.setRank(loser.getRank() - 25);
 		}
-		personDao.update(winner);
-		personDao.update(loser);
+		personDao.save(winner);
+		personDao.save(loser);
 	}
 
 }
