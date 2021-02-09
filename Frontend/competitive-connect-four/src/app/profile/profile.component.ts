@@ -33,6 +33,7 @@ export class ProfileComponent implements OnInit {
   viewHistory() {
     this.historyService.getGameHistory(this.loggedPerson).subscribe(
       res => {
+        console.log(res);
         this.gameHistoryArray = res;
       }
     );

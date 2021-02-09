@@ -48,8 +48,8 @@
          </tr>
           <tr *ngFor="let game of gameHistoryArray" [routerLink]="['history/', game.id]">
                 <td style="text-align:center"> {{ game.id }}</td>
-                <td style="text-align:center">{{ game.timestamp.month }} {{ game.timestamp.dayOfMonth }}, {{ game.timestamp.year }}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td style="text-align:center">{{ game.timestamp.hour}}:{{game.timestamp.minute}}</td>
+                <td style="text-align:center">{{ game.timestamp[2] }}/{{ game.timestamp[1] }}/{{ game.timestamp[0] }}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td style="text-align:center">{{ game.timestamp[3]}}:{{game.timestamp[4]}}</td>
                 <td style="text-align:center">{{ game.winner.username }}</td>
         </tr>
     </table>
