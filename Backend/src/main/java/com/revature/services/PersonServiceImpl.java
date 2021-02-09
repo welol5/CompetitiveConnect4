@@ -23,7 +23,7 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public Person getPersonById(Integer id) {
-		return personDao.getOne(id);
+		return personDao.findById(id).get();
 	}
 
 	@Override

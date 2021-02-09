@@ -21,7 +21,7 @@ public class GameStateServiceImpl implements GameStateService {
 
 	@Override
 	public GameState getGameStateById(Long id) {
-		return gameStateDao.getOne(id);
+		return gameStateDao.findById(id).get();
 	}
 
 

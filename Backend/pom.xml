@@ -127,23 +127,23 @@
 			<groupId>org.hibernate</groupId>
 			<version>5.4.25.Final</version>
 		</dependency>
-<!--		&lt;!&ndash; our jackson libraries: allow us to map JSON &ndash;&gt;-->
-<!--		&lt;!&ndash; jackson dependencies &ndash;&gt;-->
-<!--		<dependency>-->
-<!--			<groupId>com.fasterxml.jackson.core</groupId>-->
-<!--			<artifactId>jackson-annotations</artifactId>-->
-<!--			<version>2.9.3</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>com.fasterxml.jackson.core</groupId>-->
-<!--			<artifactId>jackson-core</artifactId>-->
-<!--			<version>2.9.3</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>com.fasterxml.jackson.core</groupId>-->
-<!--			<artifactId>jackson-databind</artifactId>-->
-<!--			<version>2.9.3</version>-->
-<!--		</dependency>-->
+		<!-- our jackson libraries: allow us to map JSON -->
+		<!-- jackson dependencies -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.9.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.9.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.3</version>
+		</dependency>
 <!--		&lt;!&ndash; Sockets &ndash;&gt;-->
 <!--		<dependency>-->
 <!--			<groupId>org.springframework</groupId>-->
