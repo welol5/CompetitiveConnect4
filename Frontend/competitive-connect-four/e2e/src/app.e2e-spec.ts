@@ -1,5 +1,7 @@
 import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
+import { browser, by, element, logging } from 'protractor';
+import { LoginPage } from './login.po';
+import { RegisterPage } from './register.po';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -10,7 +12,18 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', async () => {
     await page.navigateTo();
-    expect(await page.getTitleText()).toEqual('competitive-connect-four app is running!');
+    expect(await page.getAppComponent()).toBeTruthy();
+  });
+
+  it('should be able to create a new user and login', async() => {
+    let username = 'test';
+    let password = 'password';
+    
+    let login : LoginPage = new LoginPage();
+    login.register();
+    let register: RegisterPage = new RegisterPage();
+    register.register(username, password);
+    expect(await (await login.isLoggedIn()).getText()).toEqual(username);
   });
 
   afterEach(async () => {
