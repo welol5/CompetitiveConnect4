@@ -1,35 +1,38 @@
-
-    <ng-container *ngIf="!loggedPerson; else loggedIn">
-        <label for="user">Username: </label>
-        <input id="user" name="user" type="text" [(ngModel)]="user" />
-        <label for="pass"> Password: </label>
-        <input id="pass" name="pass" type="password" (keyup.enter)="logIn()" [(ngModel)]="pass" />
-        <button type="button" id="loginBtn" (click)="logIn()">Log In</button>
-        <button type="button" id="registerBtn" routerLink="register">Register</button>
-        
-    </ng-container>
-    <ng-template #loggedIn>
-        <br>
-        <span>
+<div class="row">
+    <div class="col">
+        <img src="assets/img/Logo.jpg" width="48" class="img-fluid">
+    </div>
+    <div class="col d-flex justify-content-end">
+        <ng-container *ngIf="!loggedPerson; else loggedIn">
+            <label for="user">Username: </label>
+            <h3>Username:</h3>
+            <input id="user" name="user" type="text" [(ngModel)]="user" />
+            <label for="pass"> Password: </label>
+            <input id="pass" name="pass" type="password" (keyup.enter)="logIn()" [(ngModel)]="pass" />
+            <button type="button" id="loginBtn" (click)="logIn()">Log In</button>
+            <button type="button" id="registerBtn" routerLink="register">Register</button>
+        </ng-container>
+        <ng-template #loggedIn>
             <table>
-            <tr>
-                <td>
-                <div>
-                    <button type="button" id="profileBtn" routerLink="profile">{{loggedPerson.username}}</button>
-                </div>
-                </td>
-                <td>
-                <div>
-                    <button type="button" id="homeBtn" (click)="goHome()">Home</button>
-                </div>
-                </td>
-                <td>
-                <div>
-                    <button type="button" id="loginBtn" (click)="logOut()">Log Out</button>
-                </div>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <button type="button" id="profileBtn"
+                                routerLink="profile">{{loggedPerson.username}}</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <button type="button" id="homeBtn" (click)="goHome()">Home</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <button type="button" id="loginBtn" (click)="logOut()">Log Out</button>
+                        </div>
+                    </td>
+                </tr>
             </table>
-        </span>
-    </ng-template>
-    
+        </ng-template>
+    </div>
+</div>
