@@ -29,6 +29,11 @@ export class GameComponent implements OnInit,OnDestroy,AfterViewChecked {
   }
 
   ngOnInit(): void {
+
+    if(!this.personService.getLoggedPerson()){
+      this.router.navigate(["home"]);
+    }
+
     this.gameService.openConnection();
   }
 
