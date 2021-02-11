@@ -9,10 +9,6 @@ import { HistoryComponent } from './history/history.component';
 
 const routes: Routes = [
   {
-    path: '**',
-    component: HomeComponent
-  },
-  {
     path:'',
     component: HomeComponent
   },
@@ -35,6 +31,10 @@ const routes: Routes = [
   {
     path:'profile/history/:id',
     component: HistoryComponent
+  },
+  {
+    path: '**',
+    component: HomeComponent
   }
 ];
 
