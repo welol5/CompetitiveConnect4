@@ -9,6 +9,10 @@ import { HistoryComponent } from './history/history.component';
 
 const routes: Routes = [
   {
+    path: '**',
+    component: HomeComponent
+  },
+  {
     path:'',
     component: HomeComponent
   },
