@@ -1,17 +1,21 @@
 
 <app-queue></app-queue>
-<div>
+<div class="text-light">
     <h1>Today's Top Players</h1>
-    <Table>
-        <tr>
-            <th>Wins</th>
-            <th>Username</th>
-            <th>rank</th>
-        </tr>
-        <tr *ngFor="let winnerObj of leaderboard">
-            <td style="text-align:center"class="first"> {{winnerObj.wins}}</td>
-            <td style="text-align:center"class="second"><div>{{winnerObj.winner.username}}</div></td>
-            <td style="text-align:center"class="third"><div>{{winnerObj.winner.rank}}</div></td>
-        </tr>
-    </Table>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Wins</th>
+                <th>Username</th>
+                <th>rank</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let winnerObj of leaderboard">
+                <td style="text-align:center"class="first"> {{winnerObj.wins}}</td>
+                <td style="text-align:center"class="second"><div>{{winnerObj.winner.username}}</div></td>
+                <td style="text-align:center"class="third"><div>{{winnerObj.winner.rank}}</div></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
