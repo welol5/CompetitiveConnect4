@@ -4,20 +4,20 @@
         Competitive Connect 4
     </a>
 
-    <form *ngIf="!this.loggedPerson && !this.isRegistering" class="form-inline">
+    <form *ngIf="!this.getLoggedPerson()" class="form-inline">
         <div *ngIf="this.incorrect" class="text-danger mr-sm-2">Incorrect username or password</div>
         <input class="form-control mr-sm-2" type="text" placeholder="Username" [(ngModel)]="user"
             [ngModelOptions]="{standalone: true}">
         <input class="form-control mr-sm-2" type="password" placeholder="Password" [(ngModel)]="pass"
             (keyup.enter)="logIn()" [ngModelOptions]="{standalone: true}">
-        <button id="loginBtn" class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="button"
+        <button id="loginBtn" class="btn btn-success my-2 my-sm-0 mr-sm-2" type="button"
             (click)="logIn()">Login</button>
         <button id="registerBtn" class="btn btn-outline-info my-2 my-sm-0" type="button"
             routerLink="register" (click)="register()">Register</button>
     </form>
 
-    <div *ngIf="this.loggedPerson" class="row text-primary">
-        <h4 class="my-2 my-sm-0 mr-sm-2">{{this.loggedPerson.username}}</h4>
+    <div *ngIf="this.getLoggedPerson()" class="row text-primary">
+        <h4 class="my-2 my-sm-0 mr-sm-2">{{this.getLoggedPerson().username}}</h4>
         <button id="profileBtn" type="button" class="btn btn-outline-info my-2 my-sm-0 mr-sm-2" routerLink="profile">Profile</button>
         <button id="logoutBtn" type="button" class="btn btn-outline-danger my-2 my-sm-0 mr-sm-2" (click)="logOut()">Logout</button>
     </div>

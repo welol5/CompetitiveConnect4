@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { UrlService } from './url.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -58,7 +59,6 @@ export class PersonService {
     this.getPersonbyId(this.getLoggedPerson().id).subscribe(
       resp => {
         this.setLoggedPerson(resp);
-        //console.log("REFRESHPERSON",resp);
       }
     );
   }
@@ -74,7 +74,6 @@ export class PersonService {
     this.loggedPerson = person;
   }
   getLoggedPerson(): Person {
-    //return JSON.parse(this.myStorage.getItem('person'));
     return this.loggedPerson;
   }
 

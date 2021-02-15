@@ -28,12 +28,15 @@ export class RegisterComponent implements OnInit {
     this.pass = '';
   }
   register() {
-
     if(this.pass === this.cpass){
       this.personService.registerPerson(this.user, this.pass).subscribe(
-        resp => {
+        (resp) => {
           this.loggedPerson = resp;
           this.router.navigate(['home']);
+        },
+        (error) => {
+          this.hasError = true;
+          this.errorMessage = 'Username already taken';
         }
       );
     } else {
