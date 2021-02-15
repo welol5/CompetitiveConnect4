@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
   register() {
 
     if(this.pass === this.cpass){
-      this.personService.registerPerson(this.user, this.pass, "").subscribe(
+      this.personService.registerPerson(this.user, this.pass).subscribe(
         resp => {
           this.loggedPerson = resp;
           this.router.navigate(['home']);

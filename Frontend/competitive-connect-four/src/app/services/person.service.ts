@@ -78,9 +78,9 @@ export class PersonService {
     return this.loggedPerson;
   }
 
-  registerPerson(username: string, password: string, filepath: string): Observable<Person> {
+  registerPerson(username: string, password: string): Observable<Person> {
     if (username && password) {
-      const queryParams = `?user=${username}&pass=${password}&filepath=${filepath}`;
+      const queryParams = `?user=${username}&pass=${password}`;
       return this.http.post(this.personUrl + queryParams,
         {headers: this.formHeaders, withCredentials:true}).pipe(
           map(resp => resp as Person)
@@ -92,14 +92,4 @@ export class PersonService {
         );
     }
   }
-  uploadFile(username: string, file: File): Observable<string> {
-    let data: FormData = new FormData();
-    data.append('file', file);
-    return this.http.post(this.personUrl + `/picture?username=${username}`, data,
-    {withCredentials:true}).pipe(
-      map(resp => resp as string)
-    );
-
-  }
-
 }

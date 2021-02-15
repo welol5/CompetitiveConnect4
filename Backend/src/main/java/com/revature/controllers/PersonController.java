@@ -53,12 +53,10 @@ public class PersonController {
 
     @PostMapping
     public ResponseEntity<Void> registerUser(HttpSession session, @RequestParam("user") String username,
-                                             @RequestParam("pass") String password,
-                                             @RequestParam("filepath")String filepath) {
+                                             @RequestParam("pass") String password) {
         Person person = new Person();
         person.setUsername(username);
         person.setPassword(password);
-        person.setProfilePicFilePath(filepath);
         try {
             personServ.addPerson(person);
             return ResponseEntity.ok().build();
