@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import com.revature.beans.Person;
+import com.revature.exceptions.DuplicateUserException;
 import com.revature.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,8 +59,12 @@ public class PersonController {
         person.setUsername(username);
         person.setPassword(password);
         person.setProfilePicFilePath(filepath);
-        personServ.addPerson(person);
-        return ResponseEntity.ok().build();
+        try {
+            personServ.addPerson(person);
+            return ResponseEntity.ok().build();
+        } catch (DuplicateUserException e){
+            return ResponseEntity.badRequest().build();
+        }
     }
     @DeleteMapping
     public ResponseEntity<Void> logOut(HttpSession session) {

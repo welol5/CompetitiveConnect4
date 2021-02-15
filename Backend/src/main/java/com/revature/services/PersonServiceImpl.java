@@ -2,8 +2,11 @@ package com.revature.services;
 
 import com.revature.beans.Person;
 import com.revature.data.PersonDAO;
+import com.revature.exceptions.DuplicateUserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -17,8 +20,12 @@ public class PersonServiceImpl implements PersonService {
 
 
 	@Override
-	public Integer addPerson(Person p) {
-		return personDao.save(p).getId();
+	public Integer addPerson(Person p) throws DuplicateUserException {
+		if(personDao.findByUsername(p.getUsername()) != null){
+			throw new DuplicateUserException();
+		} else {
+			return personDao.save(p).getId();
+		}
 	}
 
 	@Override
