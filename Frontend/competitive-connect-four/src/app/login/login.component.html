@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
-    <a class="navbar-brand" routerLink="home">
+    <a class="navbar-brand" routerLink="home" (click)="goHome()">
         <img src="assets/img/Logo.jpg" width="48" class="img-fluid">
         Competitive Connect 4
     </a>
 
-    <form *ngIf="!this.loggedPerson" class="form-inline">
+    <form *ngIf="!this.loggedPerson && !this.isRegistering" class="form-inline">
         <div *ngIf="this.incorrect" class="text-danger mr-sm-2">Incorrect username or password</div>
         <input class="form-control mr-sm-2" type="text" placeholder="Username" [(ngModel)]="user"
             [ngModelOptions]="{standalone: true}">
@@ -13,7 +13,7 @@
         <button id="loginBtn" class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="button"
             (click)="logIn()">Login</button>
         <button id="registerBtn" class="btn btn-outline-info my-2 my-sm-0" type="button"
-            routerLink="register">Register</button>
+            routerLink="register" (click)="register()">Register</button>
     </form>
 
     <div *ngIf="this.loggedPerson" class="row text-primary">

@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   pass: string;
 
   incorrect: boolean = false;
+  isRegistering : boolean = false;
 
   constructor(private personService: PersonService, private router: Router) { }
 
@@ -49,6 +50,9 @@ export class LoginComponent implements OnInit {
     this.goHome();
   }
   goHome() {
-    this.router.navigate(['home']);
+    this.isRegistering = false;
+  }
+  register(){
+    this.isRegistering = true;
   }
 }
