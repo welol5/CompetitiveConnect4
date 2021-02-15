@@ -14,8 +14,12 @@ export class RegisterComponent implements OnInit {
   loggedPerson: Person;
   user: string;
   pass: string;
+  cpass: string;
   currentFileUpload: File;
   filepath: string;
+
+  hasError: boolean = false;
+  errorMessage: string = 'No Error';
 
   constructor(private personService: PersonService, private router: Router) { }
 
@@ -24,35 +28,22 @@ export class RegisterComponent implements OnInit {
     this.pass = '';
   }
   register() {
-    console.log(this.currentFileUpload);
-    if (this.currentFileUpload) {
-      
-      this.personService.uploadFile(this.user, this.currentFileUpload).subscribe(
-        res =>{
-          
-        }
-      );
-      let newFilePath
-      newFilePath = `..3/Pictures/${this.user}/${this.user}.${this.currentFileUpload.type.split("/")[1]}`
-      console.log(this.filepath);
-      this.personService.registerPerson(this.user, this.pass, newFilePath).subscribe(
-        resp => {
-          this.loggedPerson = resp;
-          this.router.navigate(['home']);
-        }
-      )
-    } else {
+
+    if(this.pass === this.cpass){
       this.personService.registerPerson(this.user, this.pass, "").subscribe(
         resp => {
           this.loggedPerson = resp;
           this.router.navigate(['home']);
         }
-      )
+      );
+    } else {
+      this.hasError = true;
+      this.errorMessage = 'Passwords do not match';
     }
   }
   attach(image: any) {
     console.log("in the attacher ");
-    
+
     this.currentFileUpload = image.files[0];
 
   }

@@ -1,22 +1,48 @@
-<div>
-    <ng-container *ngIf="!loggedPerson">
-
-        <form>
+<div class="container w-50 bg-dark text-light text-center">
+    <br>
+    <div class="row">
+        <div class="col text-center">
             <h1>Sign up here!</h1>
-            <label for="user">Username: </label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h4>Username:</h4>
+        </div>
+        <div class="col">
             <input id="user" name="user" type="text" [(ngModel)]="user" />
-            <br>
-            <label for="pass"> Password : </label>
+        </div>
+        
+        <div class="w-100 "></div>
+
+        <div class="col">
+            <h4>Password:</h4>
+        </div>
+        <div class="col">
             <input id="pass" name="pass" type="password" [(ngModel)]="pass" />
-            <br>
-            <!-- <label for="upload"> Picture: </label>
-            <input #upload id="upload" type="file" enctype="multipart/form-data" accept="Image/*" (change)="attach(upload)"/>
-            <br> -->
-            <button type="button" id="registerBtn" (click)="register()">Register</button>
-            
+        </div>
 
-        </form>
+        <div class="w-100 "></div>
 
+        <div class="col">
+            <h4>Confirm Password:</h4>
+        </div>
+        <div class="col">
+            <input id="c-pass" name="c-pass" type="password" [(ngModel)]="cpass" />
+        </div>
+    </div>
 
-    </ng-container>
+    <div *ngIf="hasError" class="row text-danger">
+        <div class="col">
+            <h4 id='error'>{{errorMessage}}</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button type="button" id="registerBtn" (click)="register()" class="btn btn-outline-success">Register</button>
+        </div>
+    </div>
+    <br>
 </div>
