@@ -1,58 +1,59 @@
-<!-- <div 
-    style="width:170px;
-    height:auto;
-    background:hsl(0, 71%, 58%);
-    color:#FFF;
-    padding:5px 2px;
-    text-align:center;
-    top:0;
-    position:absolute; 
-    right:0;"> -->
+<div class="text-light">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <h3>Username: {{ loggedPerson.username }}</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h3>Rank: {{ loggedPerson.rank }}</h3>
+            </div>
+        </div>
+    </div>
 
- 
-    <ng-container *ngIf="loggedPerson; else noUser">
-        <!-- <h3>Profile Picture</h3>
-        <img  class="images" src="../Pictures/asdf/asdf.jpeg"/> -->
-        <div><h3>Username: {{ loggedPerson.username }}</h3></div>
-        <div><h3>Rank: {{ loggedPerson.rank }}</h3></div>
-        
-        <button type="button" id="editProfileBtn" (click)="editPerson=!editPerson">Toggle Edit Profile</button>
-        <button type="button" id="viewPastGames" (click)="viewHistory()">View Games History</button>
-    </ng-container>
-    <ng-template #noUser>
-        You're not logged in.
-    </ng-template>
-    <ng-container *ngIf="editPerson">
+    <br>
+    
+    <div>
+        <h2>Game History</h2>
+
+        <table class="table table-light table-hover table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Game ID</th>
+                    <th>Date Played</th>
+                    <th>Time Played</th>
+                    <th>Winner</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let game of gameHistoryArray" [routerLink]="['history/', game.id]">
+                    <td style="text-align:center"> {{ game.id }}</td>
+                    <td style="text-align:center">{{ game.timestamp[2] }}/{{ game.timestamp[1] }}/{{ game.timestamp[0]
+                        }}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td style="text-align:center">{{ game.timestamp[3]}}:{{game.timestamp[4]}}</td>
+                    <td style="text-align:center">{{ game.winner.username }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!--<ng-container *ngIf="editPerson">
         <div>
-        <section>
-        <h3>Edit profile for: {{ loggedPerson.username }}</h3>
-        <label for="username">New Username: </label><br>
-        <input name="username" type="text" [(ngModel)]="newUsername"><br>
-        <button type="button" (click)="updateUsername()">Update Username</button>
-        <br>
-        <label for="password">New Password: </label><br>
-        <input name="password" type="password" [(ngModel)]="newPassword"><br>
-        <input type="password" [(ngModel)]="newPassword2"><br>
-        <button type="button" (click)="updatePassword()">Update Password</button>
-        <br>
-        <h4>{{ loggedPerson.profilePicFilePath }}</h4></section></div>
-    </ng-container>
-    <ng-container>
-        <h3>View history for: {{ loggedPerson.username }}</h3>
-       <table>
-           <tr>   
-                <th>Game ID</th>
-                <th>Date Played</th>
-                <th>Time Played</th>
-                <th>Winner</th>
-         </tr>
-          <tr *ngFor="let game of gameHistoryArray" [routerLink]="['history/', game.id]">
-                <td style="text-align:center"> {{ game.id }}</td>
-                <td style="text-align:center">{{ game.timestamp[2] }}/{{ game.timestamp[1] }}/{{ game.timestamp[0] }}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td style="text-align:center">{{ game.timestamp[3]}}:{{game.timestamp[4]}}</td>
-                <td style="text-align:center">{{ game.winner.username }}</td>
-        </tr>
-    </table>
-
-    </ng-container>
-
+            <section>
+                <h3>Edit profile for: {{ loggedPerson.username }}</h3>
+                <label for="username">New Username: </label><br>
+                <input name="username" type="text" [(ngModel)]="newUsername"><br>
+                <button type="button" (click)="updateUsername()">Update Username</button>
+                <br>
+                <label for="password">New Password: </label><br>
+                <input name="password" type="password" [(ngModel)]="newPassword"><br>
+                <input type="password" [(ngModel)]="newPassword2"><br>
+                <button type="button" (click)="updatePassword()">Update Password</button>
+                <br>
+                <h4>{{ loggedPerson.profilePicFilePath }}</h4>
+            </section>
+        </div>
+    </ng-container>-->
+</div>

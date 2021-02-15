@@ -29,17 +29,12 @@ export class ProfileComponent implements OnInit {
       this.router.navigate(["home"]);
     }
 
-    this.personService.getPersonbyId(this.loggedPerson.id).subscribe(
-      resp => {
-        this.loggedPerson = resp;
-        this.personService.setLoggedPerson(this.loggedPerson);
-      }
-    );
+    this.getHistory();
   }
-  viewHistory() {
+
+  getHistory() {
     this.historyService.getGameHistory(this.loggedPerson).subscribe(
       res => {
-        console.log(res);
         this.gameHistoryArray = res;
       }
     );
