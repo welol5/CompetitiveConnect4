@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
   user: string;
   pass: string;
 
+  incorrect: boolean = false;
+
   constructor(private personService: PersonService, private router: Router) { }
 
   ngOnInit(): void {
@@ -22,19 +24,23 @@ export class LoginComponent implements OnInit {
     this.logIn();
   }
   ngOnChanges() {
-    
+
   }
   logIn() {
-    if(this.personService.getLoggedPerson()){
-      this.loggedPerson=this.personService.getLoggedPerson();
-    }else if(this.user != '' && this.pass != ''){
-    this.personService.loginPerson(this.user, this.pass).subscribe(
-      resp => {
-        this.loggedPerson = resp;
-        this.personService.setLoggedPerson(resp);
-        this.logInEvent.emit();
-      }
-    );
+    if (this.personService.getLoggedPerson()) {
+      this.loggedPerson = this.personService.getLoggedPerson();
+    } else if (this.user != '' && this.pass != '') {
+      this.personService.loginPerson(this.user, this.pass).subscribe(
+        (resp) => {
+          this.incorrect = false;
+          this.loggedPerson = resp;
+          this.personService.setLoggedPerson(resp);
+
+        },
+        (error) => {
+          this.incorrect = true;
+        }
+      );
     }
   }
   logOut() {
@@ -42,8 +48,7 @@ export class LoginComponent implements OnInit {
     this.loggedPerson = null;
     this.goHome();
   }
-  goHome(){
+  goHome() {
     this.router.navigate(['home']);
   }
-
 }

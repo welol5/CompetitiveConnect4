@@ -26,10 +26,14 @@ export class PersonService {
    loginPerson(username: string, password: string): Observable<Person> {
     if (username && password) {
       const queryParams = `?user=${username}&pass=${password}`;
-      return this.http.put(this.personUrl + queryParams,
-        {headers: this.formHeaders, withCredentials:true}).pipe(
-          map(resp => resp as Person)
-      );
+      try{
+        return this.http.put(this.personUrl + queryParams,
+          {headers: this.formHeaders, withCredentials:true}).pipe(
+            map(resp => resp as Person)
+        )
+      } catch (e){
+        return null;
+      }
     } else {
       return this.http.get(this.personUrl,
         {withCredentials:true}).pipe(
