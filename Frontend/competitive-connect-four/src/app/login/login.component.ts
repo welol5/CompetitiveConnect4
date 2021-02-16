@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   ngOnChanges() {
 
   }
+
   logIn() {
     if (this.personService.getLoggedPerson()) {
     } else if (this.user != '' && this.pass != '') {
@@ -42,15 +43,9 @@ export class LoginComponent implements OnInit {
       );
     }
   }
+
   logOut() {
     this.personService.logoutPerson();
-    this.goHome();
-  }
-  goHome() {
-    this.isRegistering = false;
-  }
-  register(){
-    this.isRegistering = true;
   }
 
   getLoggedPerson(){
