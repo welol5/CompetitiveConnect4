@@ -26,21 +26,21 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  // it('should create', () => {
+  //   expect(component).toBeTruthy();
+  // });
 
-  it('should set return a Person who is logged in', () => {
-    loginServiceSpy = jasmine.createSpyObj('PersonService', ['loginPerson']);
-    let testPerson: Person = new Person();
-    testPerson.username = 'testUsername';
-    testPerson.password = 'testPassword';
-    loginServiceSpy.loginPerson.and.returnValue(asyncData(testPerson));
+  // it('should set return a Person who is logged in', () => {
+  //   loginServiceSpy = jasmine.createSpyObj('PersonService', ['loginPerson']);
+  //   let testPerson: Person = new Person();
+  //   testPerson.username = 'testUsername';
+  //   testPerson.password = 'testPassword';
+  //   loginServiceSpy.loginPerson.and.returnValue(asyncData(testPerson));
 
-    let component = new LoginComponent(loginServiceSpy as any);
+  //   let component = new LoginComponent(loginServiceSpy as any);
 
-    component.user = 'testUsername';
-    component.pass = 'testPassword';
-    component.logIn();
-  });
+  //   component.user = 'testUsername';
+  //   component.pass = 'testPassword';
+  //   component.logIn();
+  // });
 });
