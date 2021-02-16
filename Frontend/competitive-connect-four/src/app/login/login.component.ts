@@ -1,7 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Router, RouterEvent } from '@angular/router';
-import { filter } from 'rxjs/operators';
-import { Person } from '../models/Person';
 import { PersonService } from '../services/person.service';
 
 @Component({
@@ -17,7 +14,7 @@ export class LoginComponent implements OnInit {
   incorrect: boolean = false;
   isRegistering : boolean = false;
 
-  constructor(private personService: PersonService, private router: Router) {}
+  constructor(private personService: PersonService) {}
 
   ngOnInit(): void {
     this.user = '';
