@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Person } from '../models/Person';
 import { PersonService } from '../services/person.service';
 
 @Component({
@@ -10,6 +11,7 @@ export class LoginComponent implements OnInit {
   @Output() logInEvent: EventEmitter<any> = new EventEmitter();
   user: string;
   pass: string;
+  loggedPerson: Person;
 
   incorrect: boolean = false;
   isRegistering : boolean = false;
@@ -27,12 +29,15 @@ export class LoginComponent implements OnInit {
 
   logIn() {
     if (this.personService.getLoggedPerson()) {
+      console.log('no logged user');
     } else if (this.user != '' && this.pass != '') {
+      console.log('person found');
       this.personService.loginPerson(this.user, this.pass).subscribe(
         (resp) => {
+          console.log('called subscribe');
           this.incorrect = false;
           this.personService.setLoggedPerson(resp);
-
+          this.loggedPerson = resp;
         },
         (error) => {
           this.incorrect = true;
@@ -46,6 +51,7 @@ export class LoginComponent implements OnInit {
   }
 
   getLoggedPerson(){
-    return this.personService.getLoggedPerson();
+    console.log(this.loggedPerson);
+    return this.loggedPerson;
   }
 }
